@@ -5,9 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import fr.istic.m1.aco.miniediteur.v1.command.Command;
-import fr.istic.m1.aco.miniediteur.v1.command.Couper;
 import fr.istic.m1.aco.miniediteur.v1.command.Inserer;
-import fr.istic.m1.aco.miniediteur.v1.invoker.ControllerImpl;
 import fr.istic.m1.aco.miniediteur.v1.invoker.StubController;
 import fr.istic.m1.aco.miniediteur.v1.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v1.receiver.MoteurImpl;

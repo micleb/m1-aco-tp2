@@ -12,7 +12,6 @@ import fr.istic.m1.aco.miniediteur.v1.receiver.Selection;
 import fr.istic.m1.aco.miniediteur.v1.receiver.SelectionImpl;
 
 public class MementoCouperTest {
-
 	Moteur m;
 	
 	public MementoCouperTest() {

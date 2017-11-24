@@ -14,6 +14,7 @@ public class CommandsHistoric {
 		undoHistoric = new ArrayDeque<>();
 	}
 	public void registerCommand(Command cmd) {
+		if (cmd.getMemento() == EmptyMemento.getUniqueInstance()) return ;
 		historic.push(cmd);
 	}
 	
@@ -21,7 +22,7 @@ public class CommandsHistoric {
 		if (!historic.isEmpty()) {
 			Command cmd = historic.pop();
 			cmd.getMemento().restore();
-			undoHistoric.add(cmd);
+			undoHistoric.push(cmd);
 		}
 	}
 	

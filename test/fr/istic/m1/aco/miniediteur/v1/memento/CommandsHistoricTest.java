@@ -97,6 +97,19 @@ public class CommandsHistoricTest {
 		//On annule l'étape 1, on s'attend donc à retrouver le contenu initial.
 		cmds.undo();
 		assertEquals("123456789ABCDEF", m.getContent());
+		
+		
+		//Après avoir restoré le contenu initial, on refait l'étape 1 (equivalent de CTRL+Y),
+		//donc on doit se retrouver avec le même contenu qu'a la fin de l'étape 1. 
+		cmds.redo();
+		assertEquals("1234567892345ABCDEF", m.getContent());
+		//Restoration de la commande suivante, donc on retrouve le conteu de l'étape 2.
+		cmds.redo();
+		assertEquals("2345234567892345ABCD2345EF", m.getContent());
+		assertEquals("2345234567892345ABCDEF", m.getContent());
+		cmds.redo();
+		assertEquals("2345234567892345ABCD2345EF", m.getContent());
+		
 	}
 	
 	
