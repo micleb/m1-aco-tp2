@@ -3,7 +3,6 @@ package fr.istic.m1.aco.miniediteur.v1.receiver;
 public class PressPapier {
 	private String buffer;
 	
-	
 	PressPapier(){
 		buffer = "";
 	}
@@ -25,5 +24,30 @@ public class PressPapier {
 	
 	public void clear() {
 		this.buffer = "";
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((buffer == null) ? 0 : buffer.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PressPapier other = (PressPapier) obj;
+		if (buffer == null) {
+			if (other.buffer != null)
+				return false;
+		} else if (!buffer.equals(other.buffer))
+			return false;
+		return true;
 	}
 }

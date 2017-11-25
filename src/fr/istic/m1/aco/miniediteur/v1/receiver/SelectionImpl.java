@@ -55,6 +55,31 @@ public class SelectionImpl implements Selection {
 	
 	@Override
 	public String toString() {
-		return "Début : " + startIndex + " Fin : " + getEndIndex() + " Taille : " + getLength();
+		return "Instance de Selection : \n Début : " + startIndex + "\n Fin : " + getEndIndex() + "\n Taille : " + getLength() + "\n";
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + length;
+		result = prime * result + startIndex;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SelectionImpl other = (SelectionImpl) obj;
+		if (length != other.length)
+			return false;
+		if (startIndex != other.startIndex)
+			return false;
+		return true;
 	}
 }

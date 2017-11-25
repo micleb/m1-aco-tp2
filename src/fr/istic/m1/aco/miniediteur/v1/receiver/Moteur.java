@@ -50,4 +50,12 @@ public interface Moteur {
 	public void inserer(char c);
 
 	public String getSelectedContent();
+
+	public String getContentAt(Selection s);
+	
+	@Override
+	public boolean equals(Object obj);
+	
+	@Override
+	public int hashCode();
 }

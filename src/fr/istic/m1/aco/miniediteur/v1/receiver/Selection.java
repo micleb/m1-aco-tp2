@@ -4,5 +4,12 @@ public interface Selection {
 	public int getLength();
 	public int getStartIndex();
 	public int getEndIndex();
+
 	boolean isEmpty();
+	
+	@Override
+	public boolean equals(Object obj);
+	
+	@Override
+	public int hashCode();
 }

@@ -16,9 +16,15 @@ public class Copier implements Command {
 	public void executer() {
 		moteur.copier();
 	}
-
+	
 	@Override
 	public Memento getMemento() {
 		return EmptyMemento.getUniqueInstance();
+	}
+	
+	@Override
+	public String toString() {
+		return "Commande copier de la selection : " + moteur.getCurrentSelection() 
+		+ " qui contient " + moteur.getSelectedContent();
 	}
 }
