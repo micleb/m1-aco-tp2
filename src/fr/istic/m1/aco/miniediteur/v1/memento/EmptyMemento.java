@@ -29,4 +29,13 @@ public class EmptyMemento implements Memento {
 		// Rien à restorer.
 	}
 
+	@Override
+	public boolean isIntermediateMemento() {
+		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "Memento vide sans aucun effet.";
+	}
 }

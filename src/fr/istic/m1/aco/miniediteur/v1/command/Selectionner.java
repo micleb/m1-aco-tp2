@@ -1,29 +1,32 @@
 package fr.istic.m1.aco.miniediteur.v1.command;
 
-import fr.istic.m1.aco.miniediteur.v1.invoker.ControllerImpl;
 import fr.istic.m1.aco.miniediteur.v1.memento.EmptyMemento;
 import fr.istic.m1.aco.miniediteur.v1.memento.Memento;
+import fr.istic.m1.aco.miniediteur.v1.memento.MementoSelectionner;
 import fr.istic.m1.aco.miniediteur.v1.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v1.receiver.Selection;
 
 public class Selectionner implements Command {
 
-	private ControllerImpl ctrl;
+	private Selection selection;
 	private Moteur moteur;
 	
-	public Selectionner(ControllerImpl ctrl, Moteur moteur) {
-		this.ctrl = ctrl;
+	public Selectionner(Moteur moteur, Selection s) {
+		this.selection = s;
 		this.moteur = moteur;
 	}
 
 	@Override
 	public void executer() {
-		Selection selection = ctrl.getSelection();
 		moteur.selectionner(selection);	
 	}
 
 	@Override
 	public Memento getMemento() {
-		return EmptyMemento.getUniqueInstance();
+		return new MementoSelectionner(moteur, selection);
+	}
+	
+	public String toString() {
+		return "Commande selection : " + this.selection;
 	}
 }

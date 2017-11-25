@@ -14,4 +14,6 @@ public interface Memento {
 	 * Si cette ordre n'est pas respecté, le comportement est indéfini.
 	 */
 	public void restore();
+	
+	public boolean isIntermediateMemento();
 }

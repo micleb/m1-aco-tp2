@@ -1,6 +1,7 @@
 package fr.istic.m1.aco.miniediteur.v1.command;
 
 import fr.istic.m1.aco.miniediteur.v1.memento.Memento;
+import fr.istic.m1.aco.miniediteur.v1.receiver.Selection;
 
 public interface Command {
 	

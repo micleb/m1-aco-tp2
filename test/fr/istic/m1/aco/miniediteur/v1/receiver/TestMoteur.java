@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class TestMoteur {
 	Moteur m;
+	Moteur simpleMoteur;
 	
 	@Before
 	public void setUp() {
@@ -18,6 +19,9 @@ public class TestMoteur {
 				"Les chapitres du livre :\n" + 
 				"Avant-propos - Introduction – Installation – Partage de fichiers – Samba contrôleur de domaine – Accès aux partages Windows – Gestion des impressions – Gestion avancée");
 		this.m = new MoteurImpl(b);	
+		
+		b = new StringBuffer("123456789ABCDEF");
+		this.simpleMoteur = new MoteurImpl(b);
 	}
 	
 	@Test
@@ -141,4 +145,33 @@ public class TestMoteur {
 				"Avant-propos - Introduction – Installation – Partage de fichiers – Samba contrôleur de domaine – Accès aux partages Windows – Gestion des impressions – Gestion avancée";
 		assertEquals(expectedNewContent, actualNewContent);
 	}
+	
+	@Test
+	public void testInsererDebut() {
+		Selection s = new SelectionImpl(0,0);
+		simpleMoteur.selectionner(s);
+		simpleMoteur.inserer("+-*/");
+		
+		assertEquals("+-*/123456789ABCDEF", simpleMoteur.getContent());
+	}
+	
+	@Test
+	public void testInsererFin() {
+		Selection s = new SelectionImpl(15,0);
+		simpleMoteur.selectionner(s);
+		simpleMoteur.inserer("+-*/");
+		
+		assertEquals("123456789ABCDEF+-*/", simpleMoteur.getContent());
+	}
+	
+	@Test
+	public void testInsererEcraserTout() {
+		Selection s = new SelectionImpl(0,15);
+		simpleMoteur.selectionner(s);
+		simpleMoteur.inserer("+-*/");
+		
+		assertEquals("+-*/", simpleMoteur.getContent());
+	}
+	
+	
 }

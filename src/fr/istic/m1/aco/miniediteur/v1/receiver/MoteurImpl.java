@@ -23,8 +23,8 @@ public class MoteurImpl implements Moteur {
 		this.pressPapier = new PressPapier();
 	}
 	
-	
-	private String getContentAt(Selection s) {
+	@Override
+	public String getContentAt(Selection s) {
 		if (s.isEmpty()) {
 			return "";
 		}
@@ -63,19 +63,26 @@ public class MoteurImpl implements Moteur {
 
 	@Override
 	public void inserer(String content) {
-		this.content.insert(selection.getStartIndex(), content);
+		
+		if (selection.getLength() == 0) {
+			this.content.insert(selection.getStartIndex(), content);
+		}
+		else {
+			this.content.replace(selection.getStartIndex(), selection.getEndIndex()+1, content);
+		}
+		
 	}
 	
 	@Override
 	public void inserer(char c) {
 		this.content.insert(selection.getStartIndex(), c);
 	}
-
 	@Override
-	public void selectionner(Selection s) {
-		if (s.getLength() > this.content.length() || s.getStartIndex() > this.content.length() - 1 || s.getEndIndex() > this.content.length() - 1) {
-			System.out.println("len : " + this.content.length() + " endIdx : " + s.getEndIndex());
-			throw new IllegalArgumentException("Paramètres incorrectes dans sélectionner : bornes incorrectes");
+	public void selectionner(Selection s) { //TODO BORNES
+		
+		if (s.getLength() > this.content.length() || s.getStartIndex() > this.content.length()  || s.getEndIndex() > this.content.length()) {
+			String details = "Taille du contenu : " + this.content.length() + " Index de début : " + s.getStartIndex() + " Index de fin : " + s.getEndIndex();
+			throw new IllegalArgumentException("Paramètres incorrectes dans sélectionner : bornes incorrectes : " + details);
 		}
 		this.selection = s;
 	}
@@ -100,5 +107,51 @@ public class MoteurImpl implements Moteur {
 	@Override
 	public Selection getCurrentSelection() {
 		return selection;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((pressPapier == null) ? 0 : pressPapier.hashCode());
+		result = prime * result + ((selection == null) ? 0 : selection.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		MoteurImpl other = (MoteurImpl) obj;
+		if (content == null) {
+			if (other.content != null) {
+				return false;
+			}
+		} else if (!content.equals(other.content)) {
+			return false;
+		}
+		if (pressPapier == null) {
+			if (other.pressPapier != null) {
+				return false;
+			}
+		} else if (!pressPapier.equals(other.pressPapier)) {
+			return false;
+		}
+		if (selection == null) {
+			if (other.selection != null) {
+				return false;
+			}
+		} else if (!selection.equals(other.selection)) {
+			return false;
+		}
+		return true;
 	}
 }
