@@ -10,7 +10,6 @@ import fr.istic.m1.aco.miniediteur.v1.command.Command;
 import fr.istic.m1.aco.miniediteur.v1.command.Copier;
 import fr.istic.m1.aco.miniediteur.v1.command.Couper;
 import fr.istic.m1.aco.miniediteur.v1.command.Selectionner;
-import fr.istic.m1.aco.miniediteur.v1.invoker.StubController;
 import fr.istic.m1.aco.miniediteur.v1.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v1.receiver.MoteurImpl;
 import fr.istic.m1.aco.miniediteur.v1.receiver.Selection;
@@ -44,7 +43,6 @@ public class CommandsHistoricTest {
 		cmds.undo();
 		assertEquals(INITIAL_CONTENT, m.getContent());
 		assertEquals("2345", m.getPresspapierContent());
-		System.out.println(m.getSelectedContent());
 		cmds.redo();
 		assertEquals("16789ABCDEF", m.getContent());
 	}

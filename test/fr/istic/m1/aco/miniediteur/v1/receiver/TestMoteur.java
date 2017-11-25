@@ -113,7 +113,7 @@ public class TestMoteur {
 		m.couper();
 		String actualString = this.m.getPresspapierContent();
 		assertEquals(expectedString, actualString);
-		
+	
 		//On vérifie que la commande "couper" a bien supprimé le texte selectionné.
 		String actualNewContent = m.getContent();
 		String expectedNewContent = "Ce livre sur Samba est destiné aux informaticiens désirant mettre en œuvre un serveur de fichiers et d’impression sous GNU/Linux et accessible aux clients Windows et Mac. L’intégration au réseau de l’entreprise de cette implémentation libre du protocole SMB est transparente. Cet ouvrage couvre les distributions Fedora et Ubuntu.\n" + 

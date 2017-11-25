@@ -19,7 +19,7 @@ public class MoteurImpl implements Moteur {
 	 */
 	public MoteurImpl(StringBuffer b) {
 		this.content = b;
-		this.selection = new SelectionImpl(0, 1);
+		this.selection = new SelectionImpl(0, 0);
 		this.pressPapier = new PressPapier();
 	}
 	
@@ -29,7 +29,7 @@ public class MoteurImpl implements Moteur {
 			return "";
 		}
 		else {
-			return this.content.substring(s.getStartIndex(), s.getEndIndex() + 1);
+			return this.content.substring(s.getStartIndex(), s.getEndIndex());
 		}
 	}
 	
@@ -46,19 +46,18 @@ public class MoteurImpl implements Moteur {
 
 	@Override
 	public void coller() {
-		int offset = selection.isEmpty()?0:1;
-		this.content.replace(selection.getStartIndex(), selection.getEndIndex()+offset, this.pressPapier.getContent());
+		this.content.replace(selection.getStartIndex(), selection.getEndIndex(), this.pressPapier.getContent());
 	}
 
 	@Override
 	public void copier() {
-		String selectedText = this.content.substring(selection.getStartIndex(), selection.getEndIndex() + 1);
+		String selectedText = this.content.substring(selection.getStartIndex(), selection.getEndIndex());
 		this.pressPapier.setContent(selectedText);
 	}
 	
 	@Override
 	public void supprimer() {
-		this.content.delete(selection.getStartIndex(), selection.getEndIndex() + 1);
+		this.content.delete(selection.getStartIndex(), selection.getEndIndex());
 	}
 
 	@Override
@@ -68,7 +67,7 @@ public class MoteurImpl implements Moteur {
 			this.content.insert(selection.getStartIndex(), content);
 		}
 		else {
-			this.content.replace(selection.getStartIndex(), selection.getEndIndex()+1, content);
+			this.content.replace(selection.getStartIndex(), selection.getEndIndex(), content);
 		}
 		
 	}
@@ -82,19 +81,11 @@ public class MoteurImpl implements Moteur {
 		
 		if (s.getLength() > this.content.length() || s.getStartIndex() > this.content.length()  || s.getEndIndex() > this.content.length()) {
 			String details = "Taille du contenu : " + this.content.length() + " Index de début : " + s.getStartIndex() + " Index de fin : " + s.getEndIndex();
-			throw new IllegalArgumentException("Paramètres incorrectes dans sélectionner : bornes incorrectes : " + details);
+			throw new IllegalStateException("Paramètres incorrectes dans sélectionner : bornes incorrectes : " + details);
 		}
 		this.selection = s;
 	}
-	//TODO
-	/*public void setPresspapierContent(String newContent) {
-		if (newContent == null) {
-			pressPapier.clear();
-		}
-		else {
-			this.pressPapier.setContent(newContent);
-		}
-	}*/
+
 	public String getPresspapierContent() {
 		return this.pressPapier.getContent();
 	}

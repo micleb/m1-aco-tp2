@@ -1,6 +1,11 @@
 package fr.istic.m1.aco.miniediteur.v1.receiver;
 
-public class PressPapier {
+/**
+ * @author bzherlb
+ * Représente le contenu du press papier, qui doit être affecté lors de l'utilisation de commandes
+ * telle que copier, couper...
+ */
+class PressPapier {
 	private String buffer;
 	
 	PressPapier(){

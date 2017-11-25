@@ -22,9 +22,10 @@ public class SelectionImpl implements Selection {
 		if (startIndex < 0 || length < 0) {
 			throw new IllegalArgumentException("Paramètres incorrectes dans les indices de la selection dans le constructeur SelectionImpl.");
 		}
-		
 		this.startIndex = startIndex;
 		this.length = length;
+		
+		checkInvariants();
 	}
 	
 	@Override
@@ -43,7 +44,7 @@ public class SelectionImpl implements Selection {
 			return startIndex;
 		}
 		else {
-			return startIndex + length - 1; //-1 car si l'on selectionne 10 caractères depuis l'indice 0, on va bien de 0 à 9.
+			return startIndex + length; //-1 car si l'on selectionne 10 caractères depuis l'indice 0, on va bien de 0 à 9.
 		}
 		
 	}
@@ -81,5 +82,42 @@ public class SelectionImpl implements Selection {
 		if (startIndex != other.startIndex)
 			return false;
 		return true;
+	}
+
+	private void checkInvariants() {
+		if (!invariantsOk()) {
+			throw new IllegalStateException("La sélection a un état incohérent : " + this.toString());
+		}
+	}
+	public boolean invariantsOk() {
+		return getStartIndex() <= getEndIndex()
+				&& consitencyLengthIndex() 
+				&& consistencyEmpty();
+	}
+
+	private boolean consistencyEmpty() {
+		if (isEmpty()) {
+			return getStartIndex() == getEndIndex() && getLength() == 0;
+		}
+		
+		if (getStartIndex() == getEndIndex() && getLength() == 0) {
+			return isEmpty();
+		}
+		return true;
+	}
+
+	private boolean consitencyLengthIndex() {
+		if (getLength() == 0) {
+			return getStartIndex() == getEndIndex() && isEmpty();
+		}
+		
+		// On faut faire la vérification dans les deux sens, 
+		// sinon une sélection de taille non vide avec pourtant des indices de début et de fin différents
+		// serait faussement considérée comme valide.
+		if (getStartIndex() == getEndIndex()) {
+			return getLength() == 0 && isEmpty();
+		}
+		
+		return getEndIndex() - getStartIndex() == getLength(); 
 	}
 }
