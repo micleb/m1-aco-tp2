@@ -9,6 +9,7 @@ import fr.istic.m1.aco.miniediteur.v1.command.Coller;
 import fr.istic.m1.aco.miniediteur.v1.command.Command;
 import fr.istic.m1.aco.miniediteur.v1.command.Copier;
 import fr.istic.m1.aco.miniediteur.v1.command.Couper;
+import fr.istic.m1.aco.miniediteur.v1.command.Inserer;
 import fr.istic.m1.aco.miniediteur.v1.command.Selectionner;
 import fr.istic.m1.aco.miniediteur.v1.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v1.receiver.MoteurImpl;
@@ -27,7 +28,7 @@ public class CommandsHistoricTest {
 	}
 	
 	@Test
-	public void testCouperSimple() {
+	public void testUndoCouperSimple() {
 		Selection s = new SelectionImpl(1, 4); 
 		Command sel = createSelectCmd(s);
 		sel.executer();
@@ -36,19 +37,23 @@ public class CommandsHistoricTest {
 		Command cut = new Couper(m);
 		cut.executer();
 		cmds.registerCommand(cut);
-		//cut.executer();
 		assertEquals("16789ABCDEF", m.getContent());
 		assertEquals("2345", m.getPresspapierContent());
 		
 		cmds.undo();
 		assertEquals(INITIAL_CONTENT, m.getContent());
 		assertEquals("2345", m.getPresspapierContent());
+	}
+	
+	@Test
+	public void testRedoCouperSimple() {
+		testUndoCouperSimple();
 		cmds.redo();
 		assertEquals("16789ABCDEF", m.getContent());
 	}
 	
 	@Test
-	public void testCollerSimple() {
+	public void testUndoCollerSimple() {
 		Selection s = new SelectionImpl(1, 4); 
 		Command sel = createSelectCmd(s);
 		sel.executer();
@@ -63,11 +68,15 @@ public class CommandsHistoricTest {
 		cmds.registerCommand(paste);
 		cmds.undo();
 		assertEquals(INITIAL_CONTENT, m.getContent());
-		
-		//
+	}
+	
+	@Test
+	public void testRedoCollerSimple() {
+		testUndoCollerSimple();
 		cmds.redo();
 		assertEquals("1234567892345ABCDEF", m.getContent());
 	}
+	
 	
 	@Test
 	public void testCollerMultiple() {
@@ -229,7 +238,29 @@ public class CommandsHistoricTest {
 		
 		cmds.redo();
 		assertEquals(stage4, m.getContent());
+	}
+	
+	@Test
+	public void testUndoInserer(){
+		Selection s = new SelectionImpl(9, 3); 
+		Command select = this.createSelectCmd(s);
+		select.executer();
+		cmds.registerCommand(select);
 		
+		Command inserer = new Inserer(m, "XYZT");
+		inserer.executer();
+		assertEquals("123456789XYZTDEF", m.getContent());
+		cmds.registerCommand(inserer);
+		cmds.undo();
+		
+		assertEquals(INITIAL_CONTENT, m.getContent());
+	}
+	
+	@Test
+	public void testRedoInserer() {
+		testUndoInserer();
+		cmds.redo();
+		assertEquals("123456789XYZTDEF", m.getContent());
 	}
 	
 	private Command createSelectCmd(Selection s) {

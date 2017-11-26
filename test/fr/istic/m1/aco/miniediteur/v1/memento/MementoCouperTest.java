@@ -31,5 +31,18 @@ public class MementoCouperTest {
 		cut.getMemento().restore();
 		assertEquals("123456789ABCDEF", m.getContent());
 	}
+	
+	@Test
+	public void testRestore2() {
+		Selection s = new SelectionImpl(0, 15); 
+		m.selectionner(s);
+		Command cut = new Couper(m);
+		cut.executer();
+		assertEquals("123456789ABCDEF", m.getPresspapierContent());
+		assertEquals("", m.getContent());
+		
+		cut.getMemento().restore();
+		assertEquals("123456789ABCDEF", m.getContent());
+	}
 
 }
