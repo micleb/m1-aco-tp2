@@ -18,7 +18,7 @@ import fr.istic.m1.aco.miniediteur.v1.receiver.SelectionImpl;
 
 public class CommandsHistoricTest {
 	private Moteur m;
-	private CommandsHistoric cmds = new CommandsHistoric();
+	private CommandsHistoric cmds = new CommandsHistoricImpl();
 	private static final String INITIAL_CONTENT = "123456789ABCDEF";
 	
 	@Before
