@@ -94,11 +94,13 @@ public class MiniEditorTextInterface implements IHM {
 					break;
 			}
 			System.out.println("-----------------------------------------------------");
-			System.out.println("[" + ctrl.getBuffer() + "]");
+			System.out.println("Contenu \n : [" + ctrl.getBuffer() + "]");
 			System.out.println("-----------------------------------------------------");
 			System.out.println("[" + ctrl.getSelection() + "]");
 			System.out.println("-----------------------------------------------------");
-			System.out.println("[" + ctrl.getClipboard() + "]");
+			System.out.println("Contenu de la selection \n : [" + ctrl.getSelectedContent() + "]");
+			System.out.println("-----------------------------------------------------");
+			System.out.println("Presse-papier : [" + ctrl.getClipboard() + "]");
 			System.out.println("-----------------------------------------------------");
 
 			System.out.println("Enter command (I/S/C/X/V/D/R/E/P/Z/Y/Q) > ") ;

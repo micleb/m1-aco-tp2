@@ -25,5 +25,7 @@ public interface Controller {
 	String getBuffer();
 
 	Selection getSelection();
+
+	String getSelectedContent();
 	
 }

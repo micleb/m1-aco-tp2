@@ -12,6 +12,9 @@ public class Inserer implements Command {
 	Memento mem;
 	
 	public Inserer(Moteur moteur, String content) {
+		if(moteur == null || content == null) {
+			throw new IllegalArgumentException("Null parameters are not allowed");
+		}
 		this.content = content;
 		this.moteur = moteur;
 	}

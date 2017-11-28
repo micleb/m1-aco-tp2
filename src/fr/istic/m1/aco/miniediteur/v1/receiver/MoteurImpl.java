@@ -7,6 +7,7 @@ public class MoteurImpl implements Moteur {
 	
 	public MoteurImpl() {
 		this.content = new StringBuffer();
+		this.selection = new SelectionImpl(0, 0);
 		this.pressPapier = new PressPapier();
 	}
 	

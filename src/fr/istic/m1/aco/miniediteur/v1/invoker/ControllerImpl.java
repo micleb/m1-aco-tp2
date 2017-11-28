@@ -80,6 +80,11 @@ public class ControllerImpl implements Controller{
 	public void redo() {
 		historic.redo();
 	}
+
+	@Override
+	public String getSelectedContent() {
+		return m.getSelectedContent();
+	}
 	
 	
 }
