@@ -37,8 +37,8 @@ public class ControllerImpl implements Controller{
 	}
 	
 	private void executeCommand(Command cmd) {
-		historic.registerCommand(cmd);
 		cmd.executer();
+		historic.registerCommand(cmd);
 	}
 	
 	@Override

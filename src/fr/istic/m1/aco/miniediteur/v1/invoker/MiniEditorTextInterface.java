@@ -20,7 +20,7 @@ public class MiniEditorTextInterface implements IHM {
 		System.out.println("Welcome to MiniEditor V1.0") ;
 		System.out.println("-----------------------------------------------------------") ;
 
-		System.out.println("Enter command (I/S/C/X/V/D/R/E/P/Z/Y/Q) > ") ;
+		System.out.println("[I]nsert | [S]elect | [C]opy | X:cut | V:paste | [D]elete | start [R]ecording | [E]nd recording | [P]lay recording | Z:undo | Y:redo | [Q]uit > ") ;
 		try
 		{
 			inputLine = keyboard.readLine();
@@ -101,9 +101,9 @@ public class MiniEditorTextInterface implements IHM {
 			System.out.println("Contenu de la selection \n : [" + ctrl.getSelectedContent() + "]");
 			System.out.println("-----------------------------------------------------");
 			System.out.println("Presse-papier : [" + ctrl.getClipboard() + "]");
-			System.out.println("-----------------------------------------------------");
+			System.out.println("=====================================================");
 
-			System.out.println("Enter command (I/S/C/X/V/D/R/E/P/Z/Y/Q) > ") ;
+			System.out.println("[I]nsert | [S]elect | [C]opy | X:cut | V:paste | [D]elete | start [R]ecording | [E]nd recording | [P]lay recording | Z:undo | Y:redo | [Q]uit > ") ;
 			try
 			{
 				inputLine = keyboard.readLine();
