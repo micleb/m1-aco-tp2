@@ -1,5 +1,7 @@
 package fr.istic.m1.aco.miniediteur.v1.receiver;
 
+import fr.istic.m1.aco.miniediteur.v1.command.Command;
+
 public interface Enregistreur {
 	/**
 	 * 
@@ -14,5 +16,7 @@ public interface Enregistreur {
 	/**
 	 * 
 	 */
-	public void rajouter();
+	public void rajouter(Command cmd);
+
+	void rejouer();
 }
