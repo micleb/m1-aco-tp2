@@ -59,6 +59,7 @@ public class MoteurImpl implements Moteur {
 	@Override
 	public void supprimer() {
 		this.content.delete(selection.getStartIndex(), selection.getEndIndex());
+		this.selection = new SelectionImpl(selection.getStartIndex(), 0);
 	}
 
 	@Override
