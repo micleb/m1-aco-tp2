@@ -57,7 +57,7 @@ public class MiniEditorTextInterface implements IHM {
 						//editorEngine.editorSelect(start, stop);
 						ctrl.select(start, stop);
 					}
-					catch (Exception e)
+					catch (NumberFormatException e)
 					{
 						System.out.println("Invalid number: " + numberString);
 					}
@@ -75,17 +75,20 @@ public class MiniEditorTextInterface implements IHM {
 					ctrl.delete();
 					break;
 				case 'R': /* start Recording */
-					// Insert your code here (V2)
+					ctrl.demarrer();
 					break;
 				case 'E': /* End recording */
 					// Insert your code here (V2)
+					ctrl.stoper();
 					break;
 				case 'P': /* Play recording */
 					// Insert your code here (V2)
+					ctrl.rejouer();
 					break;
 				case 'Z': /* undo */
 					// Insert your code here (V3)
 					ctrl.undo();
+					break;
 				case 'Y': /* redo */
 					// Insert your code here (V3)
 					ctrl.redo();

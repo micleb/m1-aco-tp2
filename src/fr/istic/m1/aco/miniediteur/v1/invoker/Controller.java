@@ -19,6 +19,12 @@ public interface Controller {
 	void copy();
 
 	void select(int start, int stop);
+	
+	void demarrer();
+	
+	void stoper();
+	
+	void rejouer();
 
 	String getClipboard();
 

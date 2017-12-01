@@ -45,6 +45,7 @@ public class EnregistreurImpl implements Enregistreur {
 	@Override
 	public void rejouer() {
 		while (!historic.isEmpty()) {
+			System.out.println(historic.peek().toString());
 			historic.pop().executer();
 		}
 	}
