@@ -4,7 +4,7 @@ import fr.istic.m1.aco.miniediteur.v3.memento.EmptyMemento;
 import fr.istic.m1.aco.miniediteur.v3.memento.Memento;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Moteur;
 
-public class Copier implements Command {
+public class Copier implements Command, ReplayableCommand {
 	
 	private Moteur moteur;
 	
@@ -22,9 +22,15 @@ public class Copier implements Command {
 		return EmptyMemento.getUniqueInstance();
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "Commande copier de la selection : " + moteur.getCurrentSelection() 
 		+ " qui contient " + moteur.getSelectedContent();
+	}
+
+	@Override
+	public ReplayableCommand asReplayableCommand() {
+		return this;
 	}
 }

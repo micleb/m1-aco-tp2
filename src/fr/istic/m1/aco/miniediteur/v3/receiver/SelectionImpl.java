@@ -3,7 +3,7 @@ package fr.istic.m1.aco.miniediteur.v3.receiver;
 /**
  * @author bzherlb
  * Cette classe représente une séléction dans l'éditeur de texte.
- * Une sélection est caractèrisé par un début, une fin et une taille.
+ * Une sélection est caractèrisée par un début, une fin et une taille.
  * Les commandes doivent influer sur cette sélection. 
  * 
  * Les instances de cette classes sont immuables.
@@ -20,7 +20,7 @@ public class SelectionImpl implements Selection {
 	 */
 	public SelectionImpl(int startIndex, int length) {
 		if (startIndex < 0 || length < 0) {
-			throw new IllegalArgumentException("Paramètres incorrectes dans les indices de la selection dans le constructeur SelectionImpl.");
+			throw new IllegalArgumentException("Paramètres incorrectes dans les indices de la selection dans le constructeur SelectionImpl : startIndex = " + startIndex +  " lenght = " + length);
 		}
 		this.startIndex = startIndex;
 		this.length = length;

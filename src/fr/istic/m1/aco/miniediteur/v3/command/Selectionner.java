@@ -1,32 +1,41 @@
 package fr.istic.m1.aco.miniediteur.v3.command;
 
-import fr.istic.m1.aco.miniediteur.v3.memento.EmptyMemento;
+import fr.istic.m1.aco.miniediteur.v3.invoker.IHM;
 import fr.istic.m1.aco.miniediteur.v3.memento.Memento;
 import fr.istic.m1.aco.miniediteur.v3.memento.MementoSelectionner;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Selection;
+import fr.istic.m1.aco.miniediteur.v3.receiver.SelectionImpl;
 
 public class Selectionner implements Command {
 
-	private Selection selection;
 	private Moteur moteur;
+	private IHM ui;
 	
-	public Selectionner(Moteur moteur, Selection s) {
-		this.selection = s;
+	public Selectionner(Moteur moteur, IHM ui) {
 		this.moteur = moteur;
+		this.ui = ui;
 	}
 
 	@Override
 	public void executer() {
-		moteur.selectionner(selection);	
+		int start = ui.requestInt("Début de la sélection ?");
+		int stop = ui.requestInt("Taille de la sélection ?");
+		Selection s = new SelectionImpl(start, stop);
+		moteur.selectionner(s);	
 	}
 
 	@Override
 	public Memento getMemento() {
-		return new MementoSelectionner(moteur, selection);
+		return new MementoSelectionner(moteur, moteur.getCurrentSelection());
 	}
 	
 	public String toString() {
-		return "Commande selection : " + this.selection;
+		return "Commande selection";
+	}
+	
+	@Override
+	public ReplayableCommand asReplayableCommand() {
+		return new ReplayableSelectionner(moteur.getCurrentSelection(), moteur);
 	}
 }

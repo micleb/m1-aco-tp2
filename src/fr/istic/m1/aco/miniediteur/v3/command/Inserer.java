@@ -1,5 +1,6 @@
 package fr.istic.m1.aco.miniediteur.v3.command;
 
+import fr.istic.m1.aco.miniediteur.v3.invoker.IHM;
 import fr.istic.m1.aco.miniediteur.v3.memento.Memento;
 import fr.istic.m1.aco.miniediteur.v3.memento.MementoInserer;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Moteur;
@@ -7,40 +8,43 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.Selection;
 
 public class Inserer implements Command {
 
-	private String content;
 	private Moteur moteur;
-	Memento mem;
+	private IHM ui;
 	
-	public Inserer(Moteur moteur, String content) {
-		if(moteur == null || content == null) {
+	private String lastInseredContent;
+	private String lastDeletedContent;
+	private Selection lastSelection;
+	
+	public Inserer(Moteur moteur, IHM ui) {
+		if(moteur == null || ui == null) {
 			throw new IllegalArgumentException("Null parameters are not allowed");
 		}
-		this.content = content;
+		this.ui = ui;
 		this.moteur = moteur;
 	}
 	
 	@Override
 	public void executer() {
-		mem=getMemento();
+		String content = ui.requestString("Tapez le contenu à inserer : ");
+		lastDeletedContent = moteur.getSelectedContent();
+		lastInseredContent = content;
+		lastSelection = moteur.getCurrentSelection();
+		
 		moteur.inserer(content);
 	}
 
 	@Override
 	public Memento getMemento() {
-		if (mem == null) { 
-			String deletedContent = "";
-			if (!moteur.getCurrentSelection().isEmpty()) {
-				deletedContent = moteur.getSelectedContent();
-			}
-			mem = new MementoInserer(moteur.getCurrentSelection(), content.length(), deletedContent, moteur);	
-		}
-		return mem;
+		return new MementoInserer(lastSelection, lastInseredContent, lastDeletedContent, moteur);		
 	}
 	
 	@Override
 	public String toString() {
-		return "Commande inserer sur la selection : " + moteur.getCurrentSelection() 
-		+ " qui contient " + moteur.getSelectedContent() 
-		+  " ecrasé par l'insertion de " + content;
+		return "Commande inserer"; 
+	}
+
+	@Override
+	public ReplayableCommand asReplayableCommand() {
+		return new ReplayableInserer(lastSelection, lastInseredContent, moteur);
 	}
 }

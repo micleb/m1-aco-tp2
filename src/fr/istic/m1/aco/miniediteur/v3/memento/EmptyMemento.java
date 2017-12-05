@@ -38,4 +38,10 @@ public class EmptyMemento implements Memento {
 	public String toString() {
 		return "Memento vide sans aucun effet.";
 	}
+
+	@Override
+	public void cancelRestore() {
+		// TODO Auto-generated method stub
+		
+	}
 }

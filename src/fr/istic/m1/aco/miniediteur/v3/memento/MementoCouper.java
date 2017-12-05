@@ -13,7 +13,7 @@ public class MementoCouper implements Memento {
 		if (m == null || cuttedContent == null) {
 			throw new IllegalArgumentException("Null parameters are not allowed."); 
 		}
-		if (cuttedContent.equals("") || cuttedSelection.isEmpty()) {
+		if (cuttedContent.equals("")  || cuttedSelection.isEmpty()) {
 			throw new IllegalArgumentException("You can't cut an empty selection."); 
 		}
 		this.cuttedContent = cuttedContent;
@@ -28,6 +28,13 @@ public class MementoCouper implements Memento {
 		m.inserer(cuttedContent);
 		m.selectionner(cuttedSelection);
 	}
+	
+	@Override
+	public void cancelRestore() {
+		m.selectionner(cuttedSelection);
+		m.supprimer();
+	}
+	
 	@Override
 	public boolean isIntermediateMemento() {
 		return false;
@@ -44,5 +51,4 @@ public class MementoCouper implements Memento {
 		+ " on retablie l'ancien contenue coupé qui est "
 		+ " " + this.cuttedContent;
 	}
-
 }

@@ -11,34 +11,52 @@ import fr.istic.m1.aco.miniediteur.v3.command.Copier;
 import fr.istic.m1.aco.miniediteur.v3.command.Couper;
 import fr.istic.m1.aco.miniediteur.v3.command.Inserer;
 import fr.istic.m1.aco.miniediteur.v3.command.Selectionner;
+import fr.istic.m1.aco.miniediteur.v3.invoker.StubIHM;
 import fr.istic.m1.aco.miniediteur.v3.memento.CommandsHistoric;
 import fr.istic.m1.aco.miniediteur.v3.memento.CommandsHistoricImpl;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v3.receiver.MoteurImpl;
-import fr.istic.m1.aco.miniediteur.v3.receiver.Selection;
-import fr.istic.m1.aco.miniediteur.v3.receiver.SelectionImpl;
 
 public class CommandsHistoricTest {
 	private Moteur m;
 	private CommandsHistoric cmds = new CommandsHistoricImpl();
 	private static final String INITIAL_CONTENT = "123456789ABCDEF";
 	
+	private StubIHM ui;
+	private Command selectionner; 
+	private Command couper;
+	private Command coller;
+	private Command copier;
+	private Command inserer;
+	
 	@Before
 	public void setUp() {
+		ui = new StubIHM();
 		StringBuffer b = new StringBuffer(INITIAL_CONTENT);
 		this.m = new MoteurImpl(b);	
+		
+		couper = new Couper(m);
+		coller = new Coller(m);
+		copier = new Copier(m);
+		selectionner = new Selectionner(m, ui);
+		inserer = new Inserer(m, ui);
+	}
+	
+	private void makeSelection(int start, int size) {
+		ui.addFakeUserResponse(start);
+		ui.addFakeUserResponse(size);
+		selectionner.executer();
+		cmds.registerCommand(selectionner);
 	}
 	
 	@Test
 	public void testUndoCouperSimple() {
-		Selection s = new SelectionImpl(1, 4); 
-		Command sel = createSelectCmd(s);
-		sel.executer();
-		cmds.registerCommand(sel);
-		
-		Command cut = new Couper(m);
-		cut.executer();
-		cmds.registerCommand(cut);
+		ui.addFakeUserResponse(1);
+		ui.addFakeUserResponse(4);
+		selectionner.executer();
+		cmds.registerCommand(selectionner);
+		couper.executer();
+		cmds.registerCommand(couper);
 		assertEquals("16789ABCDEF", m.getContent());
 		assertEquals("2345", m.getPresspapierContent());
 		
@@ -55,19 +73,21 @@ public class CommandsHistoricTest {
 	}
 	
 	@Test
-	public void testUndoCollerSimple() {
-		Selection s = new SelectionImpl(1, 4); 
-		Command sel = createSelectCmd(s);
-		sel.executer();
-		cmds.registerCommand(sel);
-		new Copier(m).executer();
+	public void testUndoCollerSimple() {		
+		ui.addFakeUserResponse(1);
+		ui.addFakeUserResponse(4);
+		selectionner.executer();
+		cmds.registerCommand(selectionner);
+		copier.executer();
+		cmds.registerCommand(copier);
 		assertEquals("2345", m.getPresspapierContent());
-		s = new SelectionImpl(9, 0); 
-		createSelectCmd(s).executer();
-		Command paste = new Coller(m);
-		paste.executer();
+		
+		ui.addFakeUserResponse(9);
+		ui.addFakeUserResponse(0);
+		selectionner.executer();
+		coller.executer();
+		cmds.registerCommand(coller);
 		assertEquals("1234567892345ABCDEF", m.getContent());
-		cmds.registerCommand(paste);
 		cmds.undo();
 		assertEquals(INITIAL_CONTENT, m.getContent());
 	}
@@ -84,44 +104,34 @@ public class CommandsHistoricTest {
 	final String stage3CollerMultiple = "2345234567892345ABCD2345EF";
 	@Test
 	public void testCollerMultipleUndo() {
-		Selection s = new SelectionImpl(1, 4); 
-		Command select = this.createSelectCmd(s);
-		select.executer();
-		cmds.registerCommand(select);
-		new Copier(m).executer();
+		ui.addFakeUserResponse(1);
+		ui.addFakeUserResponse(4);
+		selectionner.executer();
+		cmds.registerCommand(selectionner);
+		copier.executer();
+		cmds.registerCommand(copier);
 		assertEquals("2345", m.getPresspapierContent());
 		
 		//ETAPE 1 : A partir de l'indice 9, on fait une selection de taille 0, on colle donc "2345" à la suite de "9" sans suppression.
-		s = new SelectionImpl(9, 0); 
-		Command sel = createSelectCmd(s);
-		sel.executer();
-		cmds.registerCommand(sel);
-		Command paste = new Coller(m);
-		paste.executer();
+		ui.addFakeUserResponse(9);
+		ui.addFakeUserResponse(0);
+		selectionner.executer();
+		cmds.registerCommand(selectionner);
+		coller.executer();
+		cmds.registerCommand(coller);
 		assertEquals(stage1CollerMultiple, m.getContent());
-		cmds.registerCommand(paste);
 		
 		//ETAPE 2 : A partir de l'indice 0, on fait une selection de taille 1, on colle donc "2345" en supprimant "1"
-		s = new SelectionImpl(0, 1);
-		sel = createSelectCmd(s);
-		sel.executer();
-		cmds.registerCommand(sel);
-				
-		paste = new Coller(m);
-		paste.executer();
+		makeSelection(0, 1);
+		coller.executer();
+		cmds.registerCommand(coller);
 		assertEquals(stage2CollerMultiple, m.getContent());
-		cmds.registerCommand(paste);
 		
 		//ETAPE 3 :A partir de l'indice 20, on fait une selection de taille 0, on colle donc "2345" à la suite de "D" sans suppression.
-		s = new SelectionImpl(20, 0); 
-		sel = createSelectCmd(s);
-		sel.executer();
-		cmds.registerCommand(sel);
-		paste = new Coller(m);
-		paste.executer();
+		makeSelection(20, 0);
+		coller.executer();
 		assertEquals(stage3CollerMultiple, m.getContent());
-		cmds.registerCommand(paste);
-		
+		cmds.registerCommand(coller);
 		
 		//On annule l'étape 3, on s'attend donc à retrouver le même contenu qu'a la fin de l'étape 2.
 		cmds.undo();
@@ -175,50 +185,31 @@ public class CommandsHistoricTest {
 	
 	@Test
 	public void testCouperMultipleUndo() {
-		Selection s = new SelectionImpl(1, 4); 
-		Command select = this.createSelectCmd(s);
-		select.executer();
-		cmds.registerCommand(select);
+		makeSelection(1, 4);
 		
 		//ETAPE 1 : On execute un couper des caractères 1 à 4.
-		Command mv = new Couper(m);
-		//mv.executer();
-		cmds.registerCommand(mv);
-		mv.executer();
+		couper.executer();
+		cmds.registerCommand(couper);
 		assertEquals("2345", m.getPresspapierContent());
-		assertEquals("16789ABCDEF", m.getContent());
+		assertEquals(stage1CouperMultiple, m.getContent());
 		
 		//ETAPE 2 : A partir de l'indice 9, on fait une selection de taille 0, on colle donc "2345" à la suite de "D" sans suppression.
-		s = new SelectionImpl(9, 0); 
-		Command sel = createSelectCmd(s);
-		sel.executer();
-		cmds.registerCommand(sel);
-		Command paste = new Coller(m);
-		paste.executer();
+		makeSelection(9, 0);
+		coller.executer();
 		assertEquals(stage2CouperMultiple, m.getContent());
-		cmds.registerCommand(paste);
+		cmds.registerCommand(coller);
 		
 		//ETAPE 3 : A partir de l'indice 0, on fait une selection de taille 1, on colle donc "2345" en supprimant "1".
-		s = new SelectionImpl(0, 1);
-		sel = createSelectCmd(s);
-		sel.executer();
-		cmds.registerCommand(sel);
-				
-		paste = new Coller(m);
-		paste.executer();
+		makeSelection(0, 1);
+		coller.executer();
+		cmds.registerCommand(coller);
 		assertEquals(stage3CouperMultiple, m.getContent());
-		cmds.registerCommand(paste);
 				
-		//ETAPE 4 :A partir de l'indice 20, on fait une selection de taille 0, on colle donc "2345" à la suite de "D" sans suppression.
-		s = new SelectionImpl(18, 0); 
-		sel = createSelectCmd(s);
-		sel.executer();
-		cmds.registerCommand(sel);
-		paste = new Coller(m);
-		paste.executer();
+		//ETAPE 4 :A partir de l'indice 18, on fait une selection de taille 0, on colle donc "2345" à la suite de "F" sans suppression.
+		makeSelection(18, 0);
+		coller.executer();
+		cmds.registerCommand(coller);
 		assertEquals(stage4CouperMultiple, m.getContent());
-		cmds.registerCommand(paste);
-		
 		
 		//On annule l'étape 4, on s'attend donc à retrouver le même contenu qu'a la fin de l'étape 3.
 		cmds.undo();
@@ -253,18 +244,13 @@ public class CommandsHistoricTest {
 		assertEquals(stage4CouperMultiple, m.getContent());
 	}
 	@Test
-	public void testUndoInserer(){
-		Selection s = new SelectionImpl(9, 3); 
-		Command select = this.createSelectCmd(s);
-		select.executer();
-		cmds.registerCommand(select);
-		
-		Command inserer = new Inserer(m, "XYZT");
+	public void testUndoInserer(){		
+		makeSelection(9, 3);
+		this.ui.addFakeUserResponse("XYZT");
 		inserer.executer();
 		assertEquals("123456789XYZTDEF", m.getContent());
 		cmds.registerCommand(inserer);
 		cmds.undo();
-		
 		assertEquals(INITIAL_CONTENT, m.getContent());
 	}
 	
@@ -281,47 +267,37 @@ public class CommandsHistoricTest {
 	final String stage4InsererMultiple = "12345!..+6789XYZTDEF00*";
 			
 	@Test
-	public void testUndoInsererMultiple(){
-		Selection s = new SelectionImpl(9, 3); 
-		Command select = this.createSelectCmd(s);
-		select.executer();
-		cmds.registerCommand(select);
-		
-		Command inserer = new Inserer(m, "XYZT");
+	public void testUndoInsererMultiple(){	
+		makeSelection(9, 3);
+		this.ui.addFakeUserResponse("XYZT");
 		inserer.executer();
+		cmds.registerCommand(inserer);
 		assertEquals(stage1InsererMultiple, m.getContent());
-		cmds.registerCommand(inserer);
-		
-		s = new SelectionImpl(5, 0); 
-		select = this.createSelectCmd(s);
-		select.executer();
-		cmds.registerCommand(select);
-		inserer = new Inserer(m, "!..+");
-		cmds.registerCommand(inserer);
+			
+		makeSelection(5, 0);
+		this.ui.addFakeUserResponse("!..+");
 		inserer.executer();
+		cmds.registerCommand(inserer);
 		assertEquals(stage2InsererMultiple, m.getContent());
 		
-		s = new SelectionImpl(20, 0); 
-		select = this.createSelectCmd(s);
-		select.executer();
-		cmds.registerCommand(select);
-		inserer = new Inserer(m, "000");
-		cmds.registerCommand(inserer);
+		makeSelection(20, 0);
+		this.ui.addFakeUserResponse("000");
 		inserer.executer();
+		cmds.registerCommand(inserer);
 		assertEquals(stage3InsererMultiple, m.getContent());
-		
-		s = new SelectionImpl(22, 1); 
-		select = this.createSelectCmd(s);
-		select.executer();
-		cmds.registerCommand(select);
-		inserer = new Inserer(m, "*");
-		cmds.registerCommand(inserer);
+				
+		makeSelection(22, 1);
+		this.ui.addFakeUserResponse("*");
 		inserer.executer();
+		cmds.registerCommand(inserer);
 		assertEquals(stage4InsererMultiple, m.getContent());
 		
 		cmds.undo();
+		assertEquals(stage3InsererMultiple, m.getContent());
 		cmds.undo();
+		assertEquals(stage2InsererMultiple, m.getContent());
 		cmds.undo();
+		assertEquals(stage1InsererMultiple, m.getContent());
 		cmds.undo();
 		assertEquals(INITIAL_CONTENT, m.getContent());
 	}
@@ -367,9 +343,5 @@ public class CommandsHistoricTest {
 		assertEquals(stage2InsererMultiple, m.getContent());
 		cmds.redo();
 		assertEquals(stage3InsererMultiple, m.getContent());
-	}
-	
-	private Command createSelectCmd(Selection s) {
-		return new Selectionner(m, s);
 	}
 }

@@ -4,12 +4,12 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import fr.istic.m1.aco.miniediteur.v3.command.Command;
+import fr.istic.m1.aco.miniediteur.v3.command.ReplayableCommand;
 
 public class EnregistreurImpl implements Enregistreur {
 
-	private Deque<Command> historic;
+	private Deque<ReplayableCommand> historic;
 	private boolean isStarted;
-	
 	
 	public EnregistreurImpl() {
 		this.historic = new ArrayDeque<>();
@@ -33,7 +33,7 @@ public class EnregistreurImpl implements Enregistreur {
 			isStarted = false;
 		}
 		else {
-			throw new IllegalStateException("L'enregisteur est déjà stoppé");
+			throw new IllegalStateException("L'enregisteur est déjà stoppé.");
 		}
 	}
 
@@ -42,7 +42,7 @@ public class EnregistreurImpl implements Enregistreur {
 		if (!isStarted) {
 			throw new IllegalStateException("L'enregisteur n'est pas démarré.");
 		}
-		historic.addLast(cmd);
+		historic.addLast(cmd.asReplayableCommand());
 	}
 	
 	@Override
@@ -50,5 +50,10 @@ public class EnregistreurImpl implements Enregistreur {
 		while (!historic.isEmpty()) {
 			historic.pop().executer();
 		}
+	}
+	
+	@Override
+	public boolean isOn() {
+		return isStarted;
 	}
 }

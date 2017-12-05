@@ -4,8 +4,6 @@ package fr.istic.m1.aco.miniediteur.v3.receiver;
  * @author bzherlb
  * Représente une sélection dans l'éditeur de texte.
  * On ne parle pas ici du contenu sélectionné en lui même mais de la nature de la sélection : ses bornes et sa taille.
- *
- * Une selection est immuable.
  */
 public interface Selection {
 	/**

@@ -30,12 +30,23 @@ public class TestMoteur {
 	}
 	
 	@Test
-	public void testCopierSimple() {
+	public void testCopier() {
 		Selection s = new SelectionImpl(331, 55);
 		String expectedString = new StringBuffer("Le livre présente tout d’abord les bases indispensables").toString();
 		m.selectionner(s);
 		m.copier();
 		String actualString = this.m.getPresspapierContent();
+		assertEquals(expectedString, actualString);
+	}
+	
+	@Test
+	public void testCopierTout() {
+		String expectedString = "123456789ABCDEF";
+		Selection s = new SelectionImpl(0, 15);
+		simpleMoteur.selectionner(s);
+		assertEquals(simpleMoteur.getCurrentSelection(), s);
+		simpleMoteur.copier();
+		String actualString = this.simpleMoteur.getPresspapierContent();
 		assertEquals(expectedString, actualString);
 	}
 	
@@ -49,17 +60,6 @@ public class TestMoteur {
 		String actualString = this.m.getPresspapierContent();
 		assertEquals(expectedString, actualString);
 	}*/
-
-
-	@Test
-	(expected=IllegalArgumentException.class)
-	public void testCopierBadParam() {
-		Selection s = new SelectionImpl(-1, 55);
-		this.m.copier();
-		
-		s = new SelectionImpl(331, 10000);
-		this.m.copier();
-	}
 	
 	@Test
 	public void testCollerSelectionVide() {
@@ -107,6 +107,17 @@ public class TestMoteur {
 				"Avant-propos - Introduction – Installation – Partage de fichiers – Samba contrôleur de domaine – Accès aux partages Windows – Gestion des impressions – Gestion avancée").toString();
 		String actualString = this.m.getContent();
 		assertEquals(expectedString, actualString);
+	}
+	
+	@Test
+	public void testCollerValiditeSelection() {
+		Selection s = new SelectionImpl(0, 2);
+		simpleMoteur.selectionner(s);
+		simpleMoteur.copier();
+		s = new SelectionImpl(10, 5);
+		simpleMoteur.selectionner(s);
+		simpleMoteur.coller();
+		assertTrue(simpleMoteur.isValidSelection(simpleMoteur.getCurrentSelection()));
 	}
 	
 	@Test
@@ -174,7 +185,7 @@ public class TestMoteur {
 		Selection s = new SelectionImpl(0,15);
 		simpleMoteur.selectionner(s);
 		simpleMoteur.inserer("+-*/");
-		
+		assertTrue(simpleMoteur.isValidSelection(simpleMoteur.getCurrentSelection()));
 		assertEquals("+-*/", simpleMoteur.getContent());
 	}
 	
@@ -211,9 +222,73 @@ public class TestMoteur {
 		assertFalse(simpleMoteur.isValidSelection(s));
 	}
 	
+	@Test
+	public void testSupprimer() {
+		Selection s = new SelectionImpl(5,5);
+		simpleMoteur.selectionner(s);
+		simpleMoteur.supprimer();
+		assertEquals("12345BCDEF",simpleMoteur.getContent());
+	}
 	
+	@Test
+	public void testSupprimerReplacementSelection() {
+		Selection s = new SelectionImpl(10,5);
+		simpleMoteur.selectionner(s);
+		simpleMoteur.supprimer();
+		assertEquals("123456789A",simpleMoteur.getContent());
+		
+		//La selection s n'est plus valide puisque les 5 dernièrs caractères ont été supprimés.
+		//On vérifie que le moteur a bien corrigé sa selection.
+		Selection sValide = new SelectionImpl(10, 0);
+		assertEquals(sValide,simpleMoteur.getCurrentSelection());
+	}
 	
+	@Test
+	public void testSupprimerTout() {
+		Selection s = new SelectionImpl(0,15);
+		simpleMoteur.selectionner(s);
+		simpleMoteur.supprimer();
+		assertEquals("",simpleMoteur.getContent());
+		
+		
+		//La selection s n'est plus valide puisque tout a été supprimé.
+		//On vérifie que le moteur a bien corrigé sa selection.
+		assertTrue(simpleMoteur.isValidSelection(simpleMoteur.getCurrentSelection()));
+		Selection sValide = new SelectionImpl(0, 0);
+		assertEquals(sValide,simpleMoteur.getCurrentSelection());
+	}
 	
+	@Test 
+	public void testGetContentAt() {
+		Selection s = new SelectionImpl(7,6);
+		String expectedContent = "89ABCD";
+		String actualContent = simpleMoteur.getContentAt(s);
+		assertEquals(expectedContent, actualContent);
+	}
 	
+	@Test 
+	public void testGetContentAtSelectionVide() {
+		Selection s = new SelectionImpl(7,0);
+		String expectedContent = "";
+		String actualContent = simpleMoteur.getContentAt(s);
+		assertEquals(expectedContent, actualContent);
+	}
 	
+	@Test
+	public void testGetSelectedContent() {
+		Selection s = new SelectionImpl(7,6);
+		simpleMoteur.selectionner(s);
+		String expectedContent = "89ABCD";
+		String actualContent = simpleMoteur.getSelectedContent();
+		assertEquals(expectedContent, actualContent);
+	}
+	
+	@Test
+	public void testGetSelectedContentVide() {
+		Selection s = new SelectionImpl(7,0);
+		simpleMoteur.selectionner(s);
+		String expectedContent = "";
+		String actualContent = simpleMoteur.getSelectedContent();
+		assertEquals(expectedContent, actualContent);
+	}
 }

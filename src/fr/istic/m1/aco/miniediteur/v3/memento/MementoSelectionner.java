@@ -9,13 +9,17 @@ public class MementoSelectionner implements Memento {
 	private Selection s;
 	
 	public MementoSelectionner(Moteur m, Selection s) {
-		super();
 		this.m = m;
 		this.s = s;
 	}
 
 	@Override
 	public void restore() {
+		m.selectionner(s);
+	}
+	
+	@Override
+	public void cancelRestore() {
 		m.selectionner(s);
 	}
 	
@@ -27,6 +31,5 @@ public class MementoSelectionner implements Memento {
 	@Override
 	public String toString() {
 		return "Memento sur la selection : "  + s; 
-	}
-	
+	}	
 }

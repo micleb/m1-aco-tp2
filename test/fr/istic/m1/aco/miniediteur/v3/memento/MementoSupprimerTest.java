@@ -1,66 +1,64 @@
 package fr.istic.m1.aco.miniediteur.v3.memento;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import fr.istic.m1.aco.miniediteur.v3.command.Command;
-import fr.istic.m1.aco.miniediteur.v3.command.Inserer;
+import fr.istic.m1.aco.miniediteur.v3.command.Delete;
 import fr.istic.m1.aco.miniediteur.v3.command.Selectionner;
 import fr.istic.m1.aco.miniediteur.v3.invoker.StubIHM;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v3.receiver.MoteurImpl;
 
-public class MementoInsererTest {
+public class MementoSupprimerTest {
 
-private Moteur m;
-private StubIHM ui;
-private Command selectionner; 
-private Command inserer; 
-private static final String INITIAL_CONTENT = "123456789ABCDEF"; 
-
-	public MementoInsererTest() {
+	private Moteur m;
+	private StubIHM ui;
+	private Command selectionner; 
+	private Command supprimer;
+	private static final String INITIAL_CONTENT = "123456789ABCDEF"; 
+	
+	public MementoSupprimerTest() {
 		ui = new StubIHM();
 		StringBuffer b = new StringBuffer(INITIAL_CONTENT);
 		this.m = new MoteurImpl(b);
 		
 		selectionner = new Selectionner(m, ui);
-		inserer = new Inserer(m, ui);
+		supprimer = new Delete(m);
 	}
 	
 	@Test
 	public void testRestoreSelectionNonVide() {
-		ui.addFakeUserResponse(1);
-		ui.addFakeUserResponse(4);
+		ui.addFakeUserResponse(9);
+		ui.addFakeUserResponse(3);
 		selectionner.executer();
-		assertEquals("2345", m.getSelectedContent());
+		assertEquals("ABC", m.getSelectedContent());
 		
-		ui.addFakeUserResponse("****");
-		inserer.executer();
-		assertEquals("1****6789ABCDEF", m.getContent());
+		supprimer.executer();
+		assertEquals("123456789DEF", m.getContent());
 	
-		Memento mem = inserer.getMemento();
+		Memento mem = supprimer.getMemento();
 		mem.restore();
 		assertEquals(INITIAL_CONTENT, m.getContent());
 		mem.cancelRestore();
-		assertEquals("1****6789ABCDEF", m.getContent());
+		assertEquals("123456789DEF", m.getContent());
 	}
 	
 	@Test
 	public void testRestoreSelectionVide() {
-		ui.addFakeUserResponse(1);
+		ui.addFakeUserResponse(8);
 		ui.addFakeUserResponse(0);
 		selectionner.executer();
 		assertEquals("", m.getSelectedContent());
 		
-		ui.addFakeUserResponse("****");
-		inserer.executer();
-		assertEquals("1****23456789ABCDEF", m.getContent());
+		supprimer.executer();
+		assertEquals(INITIAL_CONTENT, m.getContent());
 	
-		Memento mem = inserer.getMemento();
+		Memento mem = supprimer.getMemento();
 		mem.restore();
 		assertEquals(INITIAL_CONTENT, m.getContent());
 		mem.cancelRestore();
-		assertEquals("1****23456789ABCDEF", m.getContent());
+		assertEquals(INITIAL_CONTENT, m.getContent());
 	}
 }

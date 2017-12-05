@@ -18,5 +18,7 @@ public interface Enregistreur {
 	 */
 	public void rajouter(Command cmd);
 
-	void rejouer();
+	public void rejouer();
+
+	public boolean isOn();
 }

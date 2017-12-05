@@ -36,6 +36,7 @@ public class MoteurImpl implements Moteur {
 	
 	@Override
 	public String getSelectedContent() {
+		checkInvariant();
 		return getContentAt(this.getCurrentSelection());
 	}
 	
@@ -43,11 +44,18 @@ public class MoteurImpl implements Moteur {
 	public void couper() {
 		this.copier();
 		this.supprimer();
+		checkInvariant();
 	}
 
 	@Override
 	public void coller() {
 		this.content.replace(selection.getStartIndex(), selection.getEndIndex(), this.pressPapier.getContent());
+		
+		if (!this.isValidSelection(getCurrentSelection())) {
+			Selection s = new SelectionImpl(selection.getStartIndex(), 0);
+			this.selectionner(s);
+		}
+		checkInvariant();
 	}
 
 	@Override
@@ -60,18 +68,20 @@ public class MoteurImpl implements Moteur {
 	public void supprimer() {
 		this.content.delete(selection.getStartIndex(), selection.getEndIndex());
 		this.selection = new SelectionImpl(selection.getStartIndex(), 0);
+		checkInvariant();
 	}
 
 	@Override
 	public void inserer(String content) {
-		
 		if (selection.getLength() == 0) {
 			this.content.insert(selection.getStartIndex(), content);
 		}
 		else {
 			this.content.replace(selection.getStartIndex(), selection.getEndIndex(), content);
+			Selection s = new SelectionImpl(selection.getStartIndex(), 0);
+			this.selectionner(s);
 		}
-		
+		checkInvariant();
 	}
 	
 	@Override
@@ -81,7 +91,6 @@ public class MoteurImpl implements Moteur {
 	
 	@Override
 	public void selectionner(Selection s) {
-		
 		if (!isValidSelection(s)) {
 			String details = "Taille du contenu : " + this.content.length() + " Index de début : " + s.getStartIndex() + " Index de fin : " + s.getEndIndex();
 			throw new IllegalStateException("Paramètres incorrectes dans sélectionner : bornes incorrectes : " + details);
@@ -147,5 +156,9 @@ public class MoteurImpl implements Moteur {
 			return false;
 		}
 		return true;
+	}
+	
+	private void checkInvariant(){
+		assert(this.isValidSelection(getCurrentSelection()));
 	}
 }

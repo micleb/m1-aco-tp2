@@ -16,4 +16,6 @@ public interface Memento {
 	public void restore();
 	
 	public boolean isIntermediateMemento();
+
+	void cancelRestore();
 }

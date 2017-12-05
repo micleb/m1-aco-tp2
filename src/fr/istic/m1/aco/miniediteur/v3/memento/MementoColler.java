@@ -11,22 +11,28 @@ public class MementoColler implements Memento {
 	private final Moteur m;
 	private String contentToRestore;
 	
-	public MementoColler(Moteur m, String removedContent) {
+	public MementoColler(Moteur m, String removedContent, Selection pasteDestination) {
 		this.pastedBuffer = m.getPresspapierContent();
-		this.pasteDestination = m.getCurrentSelection();
+		this.pasteDestination = pasteDestination;
 		this.m = m;
 		this.contentToRestore = removedContent; 
 	}
 	
 	@Override
 	public void restore() {	
-		Selection s2 = getSelectionResultante();
-		m.selectionner(s2);
+		Selection s = getSelectionResultante();
+		m.selectionner(s);
 		m.supprimer();
 		Selection restoreDst = new SelectionImpl(pasteDestination.getStartIndex(),0);
 		m.selectionner(restoreDst);
 		m.inserer(contentToRestore);
 		m.selectionner(pasteDestination);
+	}
+	
+	@Override
+	public void cancelRestore() {
+		m.selectionner(pasteDestination);
+		m.inserer(pastedBuffer);
 	}
 	
 	@Override
@@ -45,10 +51,6 @@ public class MementoColler implements Memento {
 	
 	@Override
 	public String toString() {
-		return "Memento d'annulation de la commande coller."
-		+ "A la selection : " + getSelectionResultante()
-		+ " qui contient " + m.getContentAt(getSelectionResultante())
-		+ " on restore l'ancien contenue qui est "
-		+ this.contentToRestore;
+		return "Memento d'annulation de la commande coller.";
 	}
 }
