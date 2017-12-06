@@ -7,8 +7,8 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.Enregistreur;
 
 public class StopRecording implements Command {
 
-	private Enregistreur rec;
-	private IHM ui;
+	private final Enregistreur rec;
+	private final IHM ui;
 	
 	public StopRecording(Enregistreur recorder, IHM ihm) {
 		this.rec = recorder;

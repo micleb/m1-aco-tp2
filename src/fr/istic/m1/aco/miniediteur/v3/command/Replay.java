@@ -6,7 +6,7 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.Enregistreur;
 
 public class Replay implements Command {
 
-	private Enregistreur rec;
+	private final Enregistreur rec;
 	
 	public Replay(Enregistreur recorder) {
 		this.rec = recorder;

@@ -26,7 +26,7 @@ public class CommandsHistoricImpl implements CommandsHistoric {
 			return ;
 		}
 
-		//On garde une selection que si elle est suivi d'une commande qui effectue un changement.
+		//On ne garde une selection que si elle est suivi d'une commande qui effectue un changement.
 		if (mem.isIntermediateMemento() && !historic.isEmpty() && historic.peek().isIntermediateMemento()) {
 			return ;
 		}
@@ -49,6 +49,11 @@ public class CommandsHistoricImpl implements CommandsHistoric {
 		//System.out.println(mem);
 		mem.restore();
 
+		
+		//Pour avoir un comportement d'annulation naturel.
+		//Dans la plupart des éditeurs, si l'on fait un couper puis une nouvelle sélection juste après, 
+		//on s'attend à ce qu'un CTRL-Z annule immédiatement le couper, sans avoir à faire deux CTRL-Z d'affilé à cause de 
+		//la selection faite après.
 		if (mem.isIntermediateMemento()){
 			undo();
 		}

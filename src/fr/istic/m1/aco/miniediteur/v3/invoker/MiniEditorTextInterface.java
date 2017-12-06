@@ -7,19 +7,17 @@ import fr.istic.m1.aco.miniediteur.v3.command.CommandEnum;
 
 public class MiniEditorTextInterface implements IHM {
 	private static BufferedReader keyboard = new BufferedReader(new InputStreamReader(System.in));
-	private Controller ctrl;
+	private final Controller ctrl;
 	
 	public MiniEditorTextInterface(Controller ctrl){
+		if (ctrl == null) {
+			throw new IllegalArgumentException("Null interdit");
+		}
 		this.ctrl = ctrl;
 	}
 	
 	@Override
-	public void start() {
-		
-		if (ctrl == null) {
-			System.out.println("Erreur: pas de controlleur attaché.");
-		}
-		
+	public void start() {		
 		String inputLine;
 		char commandLetter;
 

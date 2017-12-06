@@ -42,5 +42,4 @@ public class MementoInserer implements Memento {
 	public boolean isIntermediateMemento() {
 		return false;
 	}
-
 }

@@ -9,8 +9,8 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.SelectionImpl;
 
 public class Selectionner implements Command {
 
-	private Moteur moteur;
-	private IHM ui;
+	private final Moteur moteur;
+	private final IHM ui;
 	
 	public Selectionner(Moteur moteur, IHM ui) {
 		this.moteur = moteur;

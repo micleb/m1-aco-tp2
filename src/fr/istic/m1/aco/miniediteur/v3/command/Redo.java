@@ -12,8 +12,8 @@ import fr.istic.m1.aco.miniediteur.v3.memento.Memento;
  */
 public class Redo implements Command {
 
-	private CommandsHistoric historic;
-	private IHM ui;
+	private final CommandsHistoric historic;
+	private final IHM ui;
 	
 	public Redo(CommandsHistoric historic, IHM ui) {
 		this.historic = historic;

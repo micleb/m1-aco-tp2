@@ -6,8 +6,8 @@ import fr.istic.m1.aco.miniediteur.v3.memento.Memento;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Enregistreur;
 
 public class StartRecording implements Command {
-	private Enregistreur rec;
-	private IHM ui;
+	private final Enregistreur rec;
+	private final IHM ui;
 	
 	public StartRecording(Enregistreur recorder, IHM ui) {
 		this.ui = ui;
