@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="fr.istic.m1.aco.miniediteur.v3.memento.MementoCouper" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/memento/MementoCouper.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="223" width="226" x="178" y="136"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="fr.istic.m1.aco.miniediteur.v3.memento.MementoColler" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/memento/MementoColler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="241" width="218" x="444" y="136"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="fr.istic.m1.aco.miniediteur.v3.memento.MementoSelectionner" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/memento/MementoSelectionner.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="187" width="219" x="702" y="136"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="fr.istic.m1.aco.miniediteur.v3.memento.EmptyMemento" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/memento/EmptyMemento.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="169" width="188" x="961" y="136"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" language="java" name="fr.istic.m1.aco.miniediteur.v3.memento.Memento" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/memento/Memento.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="115" width="188" x="961" y="417"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" language="java" name="fr.istic.m1.aco.miniediteur.v3.memento.CommandsHistoric" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/memento/CommandsHistoric.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="151" width="194" x="1486" y="417"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="fr.istic.m1.aco.miniediteur.v3.memento.CommandsHistoricImpl" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/memento/CommandsHistoricImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="187" width="194" x="1486" y="136"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="fr.istic.m1.aco.miniediteur.v3.memento.MementoInserer" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/memento/MementoInserer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="241" width="257" x="1189" y="136"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="9">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="10" name="undoHistoric"/>      
+      <multiplicity id="11" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="12">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="13" name="uniqueInstance"/>      
+      <multiplicity id="14" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="15">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="16">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <realization id="17">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="18">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="19" name="historic"/>      
+      <multiplicity id="20" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="21">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <realization id="22">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <realization id="23">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

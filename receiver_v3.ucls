@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="fr.istic.m1.aco.miniediteur.v3.receiver.SelectionImpl" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/receiver/SelectionImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="313" width="188" x="452" y="-16"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="fr.istic.m1.aco.miniediteur.v3.receiver.PressPapier" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/receiver/PressPapier.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="205" width="165" x="657" y="409"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="fr.istic.m1.aco.miniediteur.v3.receiver.Moteur" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/receiver/Moteur.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="313" width="193" x="862" y="409"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="4" language="java" name="fr.istic.m1.aco.miniediteur.v3.receiver.Enregistreur" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/receiver/Enregistreur.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="151" width="165" x="197" y="409"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="fr.istic.m1.aco.miniediteur.v3.receiver.EnregistreurImpl" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/receiver/EnregistreurImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="205" width="215" x="197" y="-16"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="fr.istic.m1.aco.miniediteur.v3.receiver.MoteurImpl" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/receiver/MoteurImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="385" width="193" x="680" y="-16"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="7" language="java" name="fr.istic.m1.aco.miniediteur.v3.receiver.Selection" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/receiver/Selection.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="169" width="165" x="452" y="409"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <realization id="8">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <realization id="9">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="10">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="11">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="12" name="pressPapier"/>      
+      <multiplicity id="13" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="14">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="15" name="selection"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

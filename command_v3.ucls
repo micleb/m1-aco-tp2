@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.ReplayableInserer" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/ReplayableInserer.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="151" width="235" x="1073" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.ReplayableSelectionner" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/ReplayableSelectionner.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="133" width="229" x="580" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="3" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.CommandEnum" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/CommandEnum.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="277" width="219" x="321" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <interface id="4" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.Command" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/Command.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="115" width="257" x="2833" y="354"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.Selectionner" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/Selectionner.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="187" width="257" x="4021" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.Delete" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/Delete.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="187" width="257" x="3130" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.Inserer" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/Inserer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="241" width="257" x="4318" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.Redo" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/Redo.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="169" width="257" x="3427" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.ReplayableCommand" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/ReplayableCommand.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="79" width="173" x="1240" y="354"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="10" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.StartRecording" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/StartRecording.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="169" width="257" x="2536" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.MementoSupprimer" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/MementoSupprimer.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="187" width="240" x="41" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.Replay" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/Replay.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="151" width="257" x="3724" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.Copier" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/Copier.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="169" width="257" x="1942" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.EmptyReplayableCommand" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/EmptyReplayableCommand.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="184" x="849" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.Coller" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/Coller.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="205" width="257" x="1645" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.StopRecording" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/StopRecording.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="169" width="257" x="2833" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.Couper" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/Couper.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="187" width="257" x="1348" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="fr.istic.m1.aco.miniediteur.v3.command.Undo" 
+    project="fr.istic.m1.aco.miniediteur.v3" 
+    file="/fr.istic.m1.aco.miniediteur.v3/src/fr/istic/m1/aco/miniediteur/v3/command/Undo.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="169" width="257" x="2239" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="19">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="20">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="21">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="22">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="23">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="24">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="25">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="26">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="27">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="28">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="29">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="30">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="31">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="32">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="33">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="34">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="35">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
