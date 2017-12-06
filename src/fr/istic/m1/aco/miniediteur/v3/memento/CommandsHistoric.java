@@ -8,8 +8,11 @@ import fr.istic.m1.aco.miniediteur.v3.command.Command;
  * Il faut d'abord signaler à l'historique qu'une commande a été effectuée via la méthode registerCommand(),
  * puis effectuer les opérations défaire,refaire respectivement par undo redo.
  * 
- * Chaque commande doit être mémorisée, et ce immédiatement après execution
+ * Chaque commande executé doit toujours être mémorisée, et ce immédiatement après execution
  * ce n'est pas au client de décider si la commande doit avoir un traitement ou un ordre spéciale.  
+ * 
+ * Ce choix à été fait pour permettre au client de ne pas avoir à gérer les détails sous-jacents, de pouvoir dans le futur changer la gestion de manière invisible
+ * et d'avoir une interface générique valables pour toutes les commandes.
  */
 public interface CommandsHistoric {
 	

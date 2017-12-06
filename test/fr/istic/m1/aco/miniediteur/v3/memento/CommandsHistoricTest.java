@@ -48,13 +48,33 @@ public class CommandsHistoricTest {
 		selectionner.executer();
 		cmds.registerCommand(selectionner);
 	}
+	@Test
+	public void testComportementIntermediaire() {
+		//On fait selectionner et copier (i.e memento intermédiaire) avant et après
+		//couper pour vérifier que cela ne perturbe pas undo().
+		makeSelection(9,2);
+		makeSelection(4,4);
+		copier.executer();
+		cmds.registerCommand(copier);
+		couper.executer();
+		cmds.registerCommand(couper);
+		assertEquals("5678", m.getPresspapierContent());
+		copier.executer();
+		cmds.registerCommand(copier);
+		assertEquals("", m.getPresspapierContent());
+		
+		makeSelection(0, 1);
+		makeSelection(5, 1);
+		
+		//Comportement attendu : un seul UNDO doit suffire à restaurer le contenu précedent
+		//du texte du moteur, malgrès les opérations intermédiaires.Co
+		cmds.undo();
+		assertEquals(INITIAL_CONTENT, m.getContent());
+	}
 		
 	@Test
 	public void testUndoCollerSimple() {		
-		ui.addFakeUserResponse(1);
-		ui.addFakeUserResponse(4);
-		selectionner.executer();
-		cmds.registerCommand(selectionner);
+		makeSelection(1,4);
 		copier.executer();
 		cmds.registerCommand(copier);
 		assertEquals("2345", m.getPresspapierContent());
