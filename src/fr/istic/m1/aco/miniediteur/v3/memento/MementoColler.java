@@ -9,7 +9,7 @@ public class MementoColler implements Memento {
 	private final String pastedBuffer;
 	private final Selection pasteDestination;
 	private final Moteur m;
-	private String contentToRestore;
+	private final String contentToRestore;
 	
 	public MementoColler(Moteur m, String removedContent, Selection pasteDestination) {
 		this.pastedBuffer = m.getPresspapierContent();

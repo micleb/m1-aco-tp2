@@ -7,7 +7,7 @@ package fr.istic.m1.aco.miniediteur.v3.memento;
  * Pour certaines commandes, l'annulation (CTRL-Z) n'a pas de sens, c'est par exemple le cas de copier.
  * Plutôt que d'utiliser des pointeurs null dans ce genre de cas, il vaut mieux utiliser cet objet special. 
  * 
- * Du point de vu des classes ayant une dépendance vers l'interface Memento, les instances de cette classes sont des mémentos comme les autres.
+ * Du point de vue des classes ayant une dépendance vers l'interface Memento, les instances de cette classes sont des mémentos comme les autres.
  */
 public class EmptyMemento implements Memento {
 
@@ -41,7 +41,6 @@ public class EmptyMemento implements Memento {
 
 	@Override
 	public void cancelRestore() {
-		// TODO Auto-generated method stub
-		
+		// Rien à annuler.
 	}
 }

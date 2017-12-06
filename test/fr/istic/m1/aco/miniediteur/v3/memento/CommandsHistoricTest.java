@@ -48,30 +48,7 @@ public class CommandsHistoricTest {
 		selectionner.executer();
 		cmds.registerCommand(selectionner);
 	}
-	
-	@Test
-	public void testUndoCouperSimple() {
-		ui.addFakeUserResponse(1);
-		ui.addFakeUserResponse(4);
-		selectionner.executer();
-		cmds.registerCommand(selectionner);
-		couper.executer();
-		cmds.registerCommand(couper);
-		assertEquals("16789ABCDEF", m.getContent());
-		assertEquals("2345", m.getPresspapierContent());
 		
-		cmds.undo();
-		assertEquals(INITIAL_CONTENT, m.getContent());
-		assertEquals("2345", m.getPresspapierContent());
-	}
-	
-	@Test
-	public void testRedoCouperSimple() {
-		testUndoCouperSimple();
-		cmds.redo();
-		assertEquals("16789ABCDEF", m.getContent());
-	}
-	
 	@Test
 	public void testUndoCollerSimple() {		
 		ui.addFakeUserResponse(1);
@@ -93,7 +70,7 @@ public class CommandsHistoricTest {
 	}
 	
 	@Test
-	public void testRedoCollerSimple() {
+	public void testCollerSimpleRedo() {
 		testUndoCollerSimple();
 		cmds.redo();
 		assertEquals("1234567892345ABCDEF", m.getContent());
@@ -102,21 +79,16 @@ public class CommandsHistoricTest {
 	final String stage1CollerMultiple = "1234567892345ABCDEF";
 	final String stage2CollerMultiple = "2345234567892345ABCDEF"; 
 	final String stage3CollerMultiple = "2345234567892345ABCD2345EF";
+	
 	@Test
 	public void testCollerMultipleUndo() {
-		ui.addFakeUserResponse(1);
-		ui.addFakeUserResponse(4);
-		selectionner.executer();
-		cmds.registerCommand(selectionner);
+		makeSelection(1, 4);
 		copier.executer();
 		cmds.registerCommand(copier);
 		assertEquals("2345", m.getPresspapierContent());
 		
 		//ETAPE 1 : A partir de l'indice 9, on fait une selection de taille 0, on colle donc "2345" à la suite de "9" sans suppression.
-		ui.addFakeUserResponse(9);
-		ui.addFakeUserResponse(0);
-		selectionner.executer();
-		cmds.registerCommand(selectionner);
+		makeSelection(9, 0);
 		coller.executer();
 		cmds.registerCommand(coller);
 		assertEquals(stage1CollerMultiple, m.getContent());
@@ -184,6 +156,26 @@ public class CommandsHistoricTest {
 	final String stage4CouperMultiple = "23456789ABCD2345EF2345";
 	
 	@Test
+	public void testCouperSimpleUndo() {
+		makeSelection(1, 4);
+		couper.executer();
+		cmds.registerCommand(couper);
+		assertEquals("16789ABCDEF", m.getContent());
+		assertEquals("2345", m.getPresspapierContent());
+		
+		cmds.undo();
+		assertEquals(INITIAL_CONTENT, m.getContent());
+		assertEquals("2345", m.getPresspapierContent());
+	}
+	
+	@Test
+	public void testCouperSimpleRedo() {
+		testCouperSimpleUndo();
+		cmds.redo();
+		assertEquals("16789ABCDEF", m.getContent());
+	}
+	
+	@Test
 	public void testCouperMultipleUndo() {
 		makeSelection(1, 4);
 		
@@ -243,6 +235,30 @@ public class CommandsHistoricTest {
 		cmds.redo();
 		assertEquals(stage4CouperMultiple, m.getContent());
 	}
+	
+	@Test 
+	public void testCouperMultipleUndoRedo() {
+		testCouperMultipleRedo();
+		//Quelques CTRL-Z, CTRL-Y suivant la même logique.
+		cmds.undo();
+		assertEquals(stage3CouperMultiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage4CouperMultiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage3CouperMultiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage2CouperMultiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage1CouperMultiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage2CouperMultiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage1CouperMultiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage2CouperMultiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage3CouperMultiple, m.getContent());
+	}
 	@Test
 	public void testUndoInserer(){		
 		makeSelection(9, 3);
@@ -255,7 +271,7 @@ public class CommandsHistoricTest {
 	}
 	
 	@Test
-	public void testRedoInserer() {
+	public void testInsererRedo() {
 		testUndoInserer();
 		cmds.redo();
 		assertEquals("123456789XYZTDEF", m.getContent());
@@ -267,7 +283,7 @@ public class CommandsHistoricTest {
 	final String stage4InsererMultiple = "12345!..+6789XYZTDEF00*";
 			
 	@Test
-	public void testUndoInsererMultiple(){	
+	public void testInsererMultipleUndo(){	
 		makeSelection(9, 3);
 		this.ui.addFakeUserResponse("XYZT");
 		inserer.executer();
@@ -304,7 +320,7 @@ public class CommandsHistoricTest {
 	
 	@Test
 	public void testInsererMultipleRedo() {
-		testUndoInsererMultiple();
+		testInsererMultipleUndo();
 		//Après avoir restoré le contenu initial, on refait l'étape 1 (equivalent de CTRL+Y),
 		//donc on doit se retrouver avec le même contenu qu'a la fin de l'étape 1. 
 		cmds.redo();

@@ -11,7 +11,7 @@ import fr.istic.m1.aco.miniediteur.v3.command.Command;
 public interface CommandsHistoric {
 	
 	/**
-	 * @param cmd
+	 * @param cmd La commande à mémoriser pour pouvoir la rejouer plus tard.
 	 * @precondition Il faut effectuer l'enregistrement de la commande cmd immédiatement après
 	 * l'avoir exécutée. 
 	 */
@@ -38,7 +38,7 @@ public interface CommandsHistoric {
 	 * Chaque appel à registerCommand augmente cette valeur de 1.
 	 * Chaque appel à undo la diminue de 1 puisqu'une fois qu'une commande est annulé via un CTRL-Z,
 	 * on la supprime de l'historique.
-	 * @return
+	 * @return Le nombre de commande annulable dans l'historique.
 	 */
 	public int commandsHistoricsSize();
 	
@@ -46,7 +46,7 @@ public interface CommandsHistoric {
 	 * Permet de savoir combien d'annulation de commande sont mémorisées dans l'historique.
 	 * Chaque appel à undo() annule une commande donc augmente cette valeur de 1.
 	 * Chaque appel à redo diminue cette valeur de 1 puisque l'on refais une commande annulée.
-	 * @return
+	 * @return Le nombre de commande restorable dans l'historique.
 	 */
 	public int cancelationHistoricSize();
 }

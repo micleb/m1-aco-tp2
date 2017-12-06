@@ -11,8 +11,6 @@ package fr.istic.m1.aco.miniediteur.v3.receiver;
  * 
  */
 public interface Moteur {
-	
-	//TODO définir le cas où la selection est non vide : Ne rien faire? Lever une exception?
 	/**
 	 * Affecte l'état du contenu du document de ce moteur.
 	 * L'état du presse papier devient le contenu de la sélection actuelle.

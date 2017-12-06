@@ -17,5 +17,8 @@ public interface Memento {
 	
 	public boolean isIntermediateMemento();
 
+	/**
+	 * Restore la commande précédement annulée par la méthode restore();
+	 */
 	void cancelRestore();
 }

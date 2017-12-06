@@ -5,8 +5,8 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.Selection;
 
 public class MementoSelectionner implements Memento {
 
-	private Moteur m;
-	private Selection s;
+	private final Moteur m;
+	private final Selection s;
 	
 	public MementoSelectionner(Moteur m, Selection s) {
 		this.m = m;

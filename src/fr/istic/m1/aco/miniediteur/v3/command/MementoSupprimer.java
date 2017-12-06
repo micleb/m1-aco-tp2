@@ -6,9 +6,9 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.Selection;
 import fr.istic.m1.aco.miniediteur.v3.receiver.SelectionImpl;
 
 public class MementoSupprimer implements Memento {
-	private Selection lastSelectionDeletion;
-	private String contentToRestore;
-	private Moteur m;
+	private final Selection lastSelectionDeletion;
+	private final String contentToRestore;
+	private final Moteur m;
 	
 	public MementoSupprimer(Moteur m, Selection lastSelectionDeletion, String deletedContent) {
 		this.m = m;

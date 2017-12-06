@@ -1,7 +1,6 @@
 package fr.istic.m1.aco.miniediteur.v3.receiver;
 
 /**
- * @author bzherlb
  * Représente le contenu du press papier, qui doit être affecté lors de l'utilisation de commandes
  * telle que copier, couper...
  */

@@ -60,7 +60,6 @@ public class CommandsHistoricImpl implements CommandsHistoric {
 	 */
 	@Override
 	public void redo() {
-		//System.out.println("TAILLE REDO's is : " + undoHistoric.size());
 		if (undoHistoric.isEmpty()) {
 			throw new IllegalStateException("Il n'y a pas de commande à rejouer.");
 		}

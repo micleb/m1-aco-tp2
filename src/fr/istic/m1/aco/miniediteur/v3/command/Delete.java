@@ -5,9 +5,12 @@ import fr.istic.m1.aco.miniediteur.v3.memento.MementoInserer;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Selection;
 
+/**
+ * Commande qui supprime le contenu de la sélection actuelle du texte de l'éditeur.
+ */
 public class Delete implements Command {
 
-	private Moteur m;
+	private final Moteur m;
 	private String lastDeletedContent;
 	private Selection lastSelectionDeletion;
 	
@@ -31,5 +34,4 @@ public class Delete implements Command {
 	public ReplayableCommand asReplayableCommand() {
 		return new ReplayableInserer(m.getCurrentSelection(), "", m);
 	}
-
 }

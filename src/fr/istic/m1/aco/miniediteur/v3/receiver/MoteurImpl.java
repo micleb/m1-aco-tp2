@@ -16,7 +16,7 @@ public class MoteurImpl implements Moteur {
 	 * de la méthode sélectionner (pour faire des tests unitaires).
 	 * Le test de la méthode copier (par exemple) ne doit pas dépendre des méthodes
 	 * d'insertion de contenu.
-	 * @param b
+	 * @param b contenu initial du contenu du texte edité.
 	 */
 	public MoteurImpl(StringBuffer b) {
 		this.content = b;

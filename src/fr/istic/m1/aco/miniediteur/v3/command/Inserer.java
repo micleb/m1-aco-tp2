@@ -6,10 +6,15 @@ import fr.istic.m1.aco.miniediteur.v3.memento.MementoInserer;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Selection;
 
+/**
+ * Commande qui insère du texte entrée par l'utilisateur dans la sélection courrante.
+ * Si la sélection est une sélection vide, on ajoute le contenu entré à sa suite.
+ * Dans le cas d'une sélection non vide au moment de l'insertion, on écrase l'ancien contenu selectionné.
+ */
 public class Inserer implements Command {
 
-	private Moteur moteur;
-	private IHM ui;
+	private final Moteur moteur;
+	private final IHM ui;
 	
 	private String lastInseredContent;
 	private String lastDeletedContent;

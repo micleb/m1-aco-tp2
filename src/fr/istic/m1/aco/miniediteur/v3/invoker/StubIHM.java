@@ -5,22 +5,11 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
- * @author bzherlb
  * Doublure de test pour les tests unitaires
  * Utile lors des tests unitaires où l'on utilise des fonctionnalités qui demande des informations à l'utilisateur.
  * Cette implémentation spéciale imite une réponse de l'utilisateur.
  * Il est possible d'ajouter et d'utiliser plusieurs réponses à la suite.
  * 
- * --- (cpt)
- * Lors des tests unitaires, on peut vouloir utiliser et tester des commandes.
- * Problèmes : certaines commandes, tel que sélectionner ou inserer, demande à l'utilisateur 
- * une intervention pour choisir des paramètres. 
- * Pour rappel on avait fait ça dans le but d'éviter à l'ihm de devoir connaitre en avance les arguments d'une commande, pas compatible avec du polymorphisme sur une méthode très générique.
- * 
- * On pourrait lors des tests unitaires utiliser une vraie implémentation d'ihm mais cela perdrait de son interêt puisque ces tests ne serait plus automatique.
- * 
- * La solution classique à ce problème est utiliser une doublure de test.
- * Cette doublure permet d'imiter le comportement d'une vraie IHM, comme si l'utilisateur avait lui même tapez la réponse.
  */
 public class StubIHM implements IHM {
 
@@ -34,7 +23,7 @@ public class StubIHM implements IHM {
 	
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -65,7 +54,6 @@ public class StubIHM implements IHM {
 
 	@Override
 	public void notifyUser(String string) {
-		// TODO Auto-generated method stub
 		
 	}
 }

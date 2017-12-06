@@ -30,7 +30,7 @@ public interface Selection {
 	public int getEndIndex();
 
 	/**
-	 * @return TRUE si la selection est vide, sinon faux.
+	 * @return True si la selection est vide, sinon faux.
 	 */
 	boolean isEmpty();
 	

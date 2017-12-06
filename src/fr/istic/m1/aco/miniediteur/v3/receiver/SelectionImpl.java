@@ -9,14 +9,17 @@ package fr.istic.m1.aco.miniediteur.v3.receiver;
  * Les instances de cette classes sont immuables.
  */
 public class SelectionImpl implements Selection {
-	private int startIndex;
-	private int length;
+	private final int startIndex;
+	private final int length;
 	
 	/**
+	 * Constructeur.
 	 * 
-	 * @param startIndex 
-	 * @param length
-	 * @throws IllegalArgumentException si l'index de début est <0 ou la longeur est <1
+	 * @param startIndex L'indice de départ de cette sélection, inclue.
+	 * @param length La taille de la sélection. 
+	 * @precondition startIndex >= 0 
+	 * @precondition length >= 0
+	 * @throws IllegalArgumentException si une précondition n'est pas vérifié
 	 */
 	public SelectionImpl(int startIndex, int length) {
 		if (startIndex < 0 || length < 0) {

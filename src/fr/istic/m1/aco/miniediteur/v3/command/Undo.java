@@ -7,8 +7,8 @@ import fr.istic.m1.aco.miniediteur.v3.memento.Memento;
 
 public class Undo implements Command {
 
-	CommandsHistoric historic;
-	IHM ui;
+	private final CommandsHistoric historic;
+	private final IHM ui;
 	
 	public Undo(CommandsHistoric historic, IHM ui) {
 		this.historic = historic;
