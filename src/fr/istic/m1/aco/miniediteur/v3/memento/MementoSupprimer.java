@@ -1,6 +1,5 @@
-package fr.istic.m1.aco.miniediteur.v3.command;
+package fr.istic.m1.aco.miniediteur.v3.memento;
 
-import fr.istic.m1.aco.miniediteur.v3.memento.Memento;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Selection;
 import fr.istic.m1.aco.miniediteur.v3.receiver.SelectionImpl;
