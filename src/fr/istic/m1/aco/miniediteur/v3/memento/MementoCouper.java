@@ -3,12 +3,21 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Selection;
 import fr.istic.m1.aco.miniediteur.v3.receiver.SelectionImpl;
 
+/**
+ *  Mémento d'annulation de la commande couper. 
+ *  On restore le contenu supprimé à la place où il était.
+ *
+ */
 public class MementoCouper implements Memento {
-
 	private final String cuttedContent;
 	private final Selection cuttedSelection;
 	private final Moteur m;
 	
+	/**
+	 * @param m Le moteur sur lequel a eu lieu l'execution de la commande.
+	 * @param cuttedSelection La selection sur laquelle la commande couper à été effectuée.
+	 * @param cuttedContent Le contenu coupé.
+	 */
 	public MementoCouper(Moteur m, Selection cuttedSelection, String cuttedContent) {
 		if (m == null || cuttedContent == null) {
 			throw new IllegalArgumentException("Null parameters are not allowed."); 
