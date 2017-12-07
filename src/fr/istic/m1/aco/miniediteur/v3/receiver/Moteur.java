@@ -46,7 +46,7 @@ public interface Moteur {
 	 * Si la sélection actuelle est vide, on ajoute le contenu donné à la suite de l'indice de départ de cette sélection,
 	 * mais sans écraser de contenu.
 	 * Si la sélection n'est pas vide, on insère en écrasant le contenu actuellement sélectionné.
-	 * @param s Le contenu a ajouter.
+	 * @param content Le contenu a ajouter.
 	 */
 	public void inserer(String content);
 	
@@ -70,7 +70,7 @@ public interface Moteur {
 	public Selection getCurrentSelection(); 
 	
 	/**
-	 * @post getPresspapierContent() != null
+	 * @postcondition getPresspapierContent() != null
 	 * @return L'état actuelle du presse papier, éventuellement une chaine vide.
 	 */
 	public String getPresspapierContent();
@@ -81,14 +81,14 @@ public interface Moteur {
 	public String getContent();
 	
 	/**
-	 * @post getSelectedContent() != null.
+	 * @postcondition getSelectedContent() != null.
 	 * @return Le contenu à l'interieur des bornes de la sélection actualle.
 	 */
 	public String getSelectedContent();
 
 	/**
-	 * @pre s != null
-	 * @post getContentAt(Selection s) != null
+	 * @precondition s != null
+	 * @postcondition getContentAt(Selection s) != null même si s est vide(châine vide au lieu de null).
 	 * @param s La sélection qui représente une partie du contenu qui nous interesse.
 	 * @return Le contenu de cette selection.
 	 */

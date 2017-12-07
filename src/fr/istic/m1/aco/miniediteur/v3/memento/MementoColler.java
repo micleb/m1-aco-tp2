@@ -19,8 +19,8 @@ public class MementoColler implements Memento {
 	 * @param m Le moteur sur lequel a eu lieu l'execution de la commande.
 	 * @param overwrittenContent Le contenu écrasé par la commande copier, dans le cas où la selection est non vide.
 	 * @param pasteDestination La selection sur laquelle la commande supprimer à été effectuée.
-	 * @precondition m != null & removedContent != null & pasteDestination != null.
-	 * @precondition Si la commande coller n'a pas écrasé de contenu (cas de la sélection est vide) alors la overwrittenContent est une chaîne vide. Null est interdit.
+	 * @precondition m {@literal !=} null {@literal &} removedContent != null {@literal &} pasteDestination {@literal !=} null.
+	 * @precondition Si la commande coller n'a pas écrasé de contenu (cas de la sélection est vide) alors overwrittenContent est une chaîne vide. Null est interdit.
 	 */
 	public MementoColler(Moteur m, String overwrittenContent, Selection pasteDestination) {
 		

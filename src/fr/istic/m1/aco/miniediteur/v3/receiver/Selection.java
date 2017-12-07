@@ -10,7 +10,7 @@ public interface Selection {
 	 * La taille de la sélection.
 	 * Elle peut-être égale à zéro pour représenter une séléction vide, c'est à dire quand 
 	 * le curseur est positionné quelque part mais qu'il n'y a pas de caractère en particulier de selectionné.
-	 * @post getLength() >= 0
+	 * @postcondition getLength() {@literal >=} 0
 	 * @return La taille du contenu séléctionné.
 	 */
 	public int getLength();
@@ -18,7 +18,7 @@ public interface Selection {
 	
 	/**
 	 * @return L'indice de départ de cette sélection.
-	 * @postcondition return value > 0.
+	 * @postcondition return value {@literal > } 0.
 	 */
 	public int getStartIndex();
 	

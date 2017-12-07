@@ -19,9 +19,10 @@ public class MementoInserer implements Memento {
 	/**
 	 * Constructeur.
 	 * @param m Le moteur sur lequel a eu lieu l'execution de la commande.
+	 * @param insertedContent Le contenu ajouté lors de l'execution de la commande. 
 	 * @param overwrittenContent Le contenu écrasé par la commande inserer, dans le cas où la selection est non vide.
 	 * @param insertionDestination La selection sur laquelle la commande supprimer à été effectuée.
-	 * @precondition m != null & removedContent != null & insertionDestination != null.
+	 * @precondition m {@literal !=} null {@literal &} removedContent {@literal !=} null {@literal &} insertionDestination {@literal !=} null \n.
 	 * @precondition Si la commande inserer n'a pas écrasé de contenu (cas de la sélection est vide) alors overwrittenContent est une chaîne vide. Null est interdit.
 	 */
 	public MementoInserer(Selection insertionDestination, String insertedContent, String overwrittenContent, Moteur m) {

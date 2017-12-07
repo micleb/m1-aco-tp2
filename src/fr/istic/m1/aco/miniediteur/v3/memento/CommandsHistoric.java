@@ -27,7 +27,7 @@ public interface CommandsHistoric {
 	/**
 	 * Annule la dernière commande mémorisée qui modifie l'état du moteur en restorant l'état du contenu du moteur avant son éxécution. 
 	 * @see CommandsHistoric#registerCommand(Command)
-	 * @precondition Il doit y avoir quelque chose à annuler, c'est à dire que commandsHistoricsSize() > 0.
+	 * @precondition Il doit y avoir quelque chose à annuler, c'est à dire que commandsHistoricsSize() {@literal >} 0.
 	 */
 	public void undo();
 
@@ -36,7 +36,7 @@ public interface CommandsHistoric {
 	 * Rejoue la dernière commande précédement annulée via un appel à undo(), en restorant l'état du contenu du moteur avant annulation.
 	 * Puisque la commande est rejoué, elle est automatiquement de nouveau mémorisée via registerCommand.
 	 * Cela permet de revenir sur sa décision et d'annuler la commande de nouveau.
-	 * @precondition Il doit y avoir quelque chose à rejouer, c'est à dire que cancelationHistoricSize() > 0.
+	 * @precondition Il doit y avoir quelque chose à rejouer, c'est à dire que cancelationHistoricSize() {@literal >} 0.
 	 */
 	public void redo();
 	
