@@ -16,7 +16,20 @@ public class MementoInserer implements Memento {
 	private final Selection insertion;
 	private final Moteur m;
 		
+	/**
+	 * Constructeur.
+	 * @param m Le moteur sur lequel a eu lieu l'execution de la commande.
+	 * @param overwrittenContent Le contenu écrasé par la commande inserer, dans le cas où la selection est non vide.
+	 * @param insertionDestination La selection sur laquelle la commande supprimer à été effectuée.
+	 * @precondition m != null & removedContent != null & insertionDestination != null.
+	 * @precondition Si la commande inserer n'a pas écrasé de contenu (cas de la sélection est vide) alors overwrittenContent est une chaîne vide. Null est interdit.
+	 */
 	public MementoInserer(Selection insertionDestination, String insertedContent, String overwrittenContent, Moteur m) {
+		
+		if (m == null || overwrittenContent == null || insertionDestination == null) {
+			throw new IllegalArgumentException("Null est interdit");
+		}
+		
 		checkArgumentConsistency(overwrittenContent, insertionDestination);
 		this.inseredContent = insertedContent;
 		this.insertionLenght = insertedContent.length();
@@ -50,7 +63,6 @@ public class MementoInserer implements Memento {
 	public void cancelRestore() {
 		m.selectionner(insertion);
 		m.inserer(inseredContent);
-		m.selectionner(insertion);
 	}
 	
 	private Selection getSelectionOfNewContent() {
@@ -60,5 +72,13 @@ public class MementoInserer implements Memento {
 	@Override
 	public boolean isIntermediateMemento() {
 		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "Memento d'annulation de la commande inserer."
+		+ "A la selection : " + getSelectionOfNewContent()
+		+ "\n on supprime le contenue inseré qui est " + this.inseredContent 
+		+ "\n et on restore le contenu écrasé qui est : " + this.overwrittenContent;
 	}
 }

@@ -56,16 +56,14 @@ public class EnregistreurTest {
 		rec.demarrer();
 		
 		makeSelection(1, 4);
-		Command mv = new Couper(m);
-		mv.executer();
-		rec.rajouter(mv);
+		couper.executer();
+		rec.rajouter(couper);
 		assertEquals("16789ABCDEF",m.getContent());
 		assertEquals("2345",  m.getPresspapierContent());
 		
 		makeSelection(5, 0);
-		Command paste = new Coller(m);
-		paste.executer();
-		rec.rajouter(paste);
+		coller.executer();
+		rec.rajouter(coller);
 		assertEquals("167892345ABCDEF", m.getContent());
 		
 		rec.stopper();

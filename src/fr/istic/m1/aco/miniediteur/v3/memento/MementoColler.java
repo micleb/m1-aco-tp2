@@ -6,7 +6,6 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.SelectionImpl;
 
 /**
  * Mémento d'annulation de la commande coller. On supprime le contenu collé et on restore le contenu précédement écrasé si la séléction était non vide.
- *
  */
 public class MementoColler implements Memento {
 
@@ -16,11 +15,12 @@ public class MementoColler implements Memento {
 	private final String contentToRestore;
 	
 	/**
+	 * Constructeur.
 	 * @param m Le moteur sur lequel a eu lieu l'execution de la commande.
 	 * @param overwrittenContent Le contenu écrasé par la commande copier, dans le cas où la selection est non vide.
 	 * @param pasteDestination La selection sur laquelle la commande supprimer à été effectuée.
 	 * @precondition m != null & removedContent != null & pasteDestination != null.
-	 * @precondition Si la commande coller n'a pas écrasé de contenu (cas de la sélection est vide) alors la removedContent est une chaîne vide. Null est interdit.
+	 * @precondition Si la commande coller n'a pas écrasé de contenu (cas de la sélection est vide) alors la overwrittenContent est une chaîne vide. Null est interdit.
 	 */
 	public MementoColler(Moteur m, String overwrittenContent, Selection pasteDestination) {
 		
@@ -81,6 +81,9 @@ public class MementoColler implements Memento {
 	
 	@Override
 	public String toString() {
-		return "Memento d'annulation de la commande coller.";
+		return "Memento d'annulation de la commande coller : \n"
+				+ "On supprime le contenu coller " + pastedBuffer +
+				"\n dans la sélection " + pasteDestination +
+				"\n et on restore le contenu écrasé qui est : " + this.contentToRestore;
 	}
 }

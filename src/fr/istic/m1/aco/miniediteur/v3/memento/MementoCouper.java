@@ -6,7 +6,6 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.SelectionImpl;
 /**
  *  Mémento d'annulation de la commande couper. 
  *  On restore le contenu supprimé à la place où il était.
- *
  */
 public class MementoCouper implements Memento {
 	private final String cuttedContent;
@@ -14,6 +13,7 @@ public class MementoCouper implements Memento {
 	private final Moteur m;
 	
 	/**
+	 * Constructeur.
 	 * @param m Le moteur sur lequel a eu lieu l'execution de la commande.
 	 * @param cuttedSelection La selection sur laquelle la commande couper à été effectuée.
 	 * @param cuttedContent Le contenu coupé.
@@ -57,7 +57,6 @@ public class MementoCouper implements Memento {
 	public String toString() {
 		return "Memento d'annulation de la commande couper."
 		+ "A la selection : " + getSelectionRestoration()
-		+ " on retablie l'ancien contenue coupé qui est "
-		+ " " + this.cuttedContent;
+		+ " on retablie l'ancien contenue coupé qui est " + this.cuttedContent;
 	}
 }

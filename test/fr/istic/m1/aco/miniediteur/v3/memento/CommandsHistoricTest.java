@@ -9,6 +9,7 @@ import fr.istic.m1.aco.miniediteur.v3.command.Coller;
 import fr.istic.m1.aco.miniediteur.v3.command.Command;
 import fr.istic.m1.aco.miniediteur.v3.command.Copier;
 import fr.istic.m1.aco.miniediteur.v3.command.Couper;
+import fr.istic.m1.aco.miniediteur.v3.command.Delete;
 import fr.istic.m1.aco.miniediteur.v3.command.Inserer;
 import fr.istic.m1.aco.miniediteur.v3.command.Selectionner;
 import fr.istic.m1.aco.miniediteur.v3.invoker.StubIHM;
@@ -28,6 +29,7 @@ public class CommandsHistoricTest {
 	private Command coller;
 	private Command copier;
 	private Command inserer;
+	private Command supprimer;
 	
 	@Before
 	public void setUp() {
@@ -40,6 +42,7 @@ public class CommandsHistoricTest {
 		copier = new Copier(m);
 		selectionner = new Selectionner(m, ui);
 		inserer = new Inserer(m, ui);
+		supprimer = new Delete(m);
 	}
 	
 	private void makeSelection(int start, int size) {
@@ -73,15 +76,13 @@ public class CommandsHistoricTest {
 	}
 		
 	@Test
-	public void testUndoCollerSimple() {		
+	public void testCollerSimpleUndo() {		
 		makeSelection(1,4);
 		copier.executer();
 		cmds.registerCommand(copier);
 		assertEquals("2345", m.getPresspapierContent());
 		
-		ui.addFakeUserResponse(9);
-		ui.addFakeUserResponse(0);
-		selectionner.executer();
+		makeSelection(9, 0);
 		coller.executer();
 		cmds.registerCommand(coller);
 		assertEquals("1234567892345ABCDEF", m.getContent());
@@ -91,7 +92,7 @@ public class CommandsHistoricTest {
 	
 	@Test
 	public void testCollerSimpleRedo() {
-		testUndoCollerSimple();
+		testCollerSimpleUndo();
 		cmds.redo();
 		assertEquals("1234567892345ABCDEF", m.getContent());
 	}
@@ -380,4 +381,113 @@ public class CommandsHistoricTest {
 		cmds.redo();
 		assertEquals(stage3InsererMultiple, m.getContent());
 	}
+	
+	@Test 
+	public void testSupprimerSimpleUndo() {
+		makeSelection(6, 4);
+		supprimer.executer();
+		cmds.registerCommand(supprimer);
+		assertEquals("123456BCDEF", m.getContent());
+		cmds.undo();
+		assertEquals(INITIAL_CONTENT, m.getContent());
+	}
+	
+	@Test 
+	public void testSupprimerSimpleRedo() {
+		testSupprimerSimpleUndo();
+		cmds.redo();
+		assertEquals("123456BCDEF", m.getContent());
+		cmds.undo();
+		assertEquals(INITIAL_CONTENT, m.getContent());
+	}
+	
+	final String stage1SupprimerMultiple = "123456BCDEF";
+	final String stage2SupprimerMultiple = "123456BCDE";
+	final String stage3SupprimerMultiple = "1234CDE"; 
+	final String stage4SupprimerMultiple = "34CDE";
+	
+	
+	@Test 
+	public void testSupprimerMultipleUndo() {
+		//On supprime 789A
+		makeSelection(6, 4);
+		supprimer.executer();
+		cmds.registerCommand(supprimer);
+		assertEquals(stage1SupprimerMultiple, m.getContent());
+		
+		//On supprime le F à la fin.
+		makeSelection(10, 1);
+		supprimer.executer();
+		cmds.registerCommand(supprimer);
+		assertEquals(stage2SupprimerMultiple, m.getContent());
+		
+		//On supprime 56B
+		makeSelection(4, 3);
+		supprimer.executer();
+		cmds.registerCommand(supprimer);
+		assertEquals(stage3SupprimerMultiple, m.getContent());
+		
+		//On supprime 12
+		makeSelection(0, 2);
+		supprimer.executer();
+		cmds.registerCommand(supprimer);
+		assertEquals(stage4SupprimerMultiple, m.getContent());
+		
+		//On restore 12
+		cmds.undo();
+		assertEquals(stage3SupprimerMultiple, m.getContent());
+		//On restore 56B
+		cmds.undo();
+		assertEquals(stage2SupprimerMultiple, m.getContent());
+		//On restore le f à la fin.
+		cmds.undo();
+		assertEquals(stage1SupprimerMultiple, m.getContent());
+		//On restore 789A
+		cmds.undo();
+		assertEquals(INITIAL_CONTENT, m.getContent());
+	}
+	
+	@Test
+	public void testSupprimerMultipleRedo() {
+		testSupprimerMultipleUndo();
+		//Après avoir restoré le contenu initial, on refait l'étape 1 (equivalent de CTRL+Y),
+		//donc on doit se retrouver avec le même contenu qu'a la fin de l'étape 1. 
+		cmds.redo();
+		assertEquals(stage1SupprimerMultiple, m.getContent());
+		//Restoration de la commande suivante, donc on retrouve le conteu de l'étape 2.
+		cmds.redo();
+		assertEquals(stage2SupprimerMultiple, m.getContent());
+		//Puisqu'on a fait 3 redo après nos 3 undo, c'est comme si on avait jamais fait d'undo.
+		//Donc on retrouve à la situation de l'étape 3.
+		cmds.redo();
+		assertEquals(stage3SupprimerMultiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage4SupprimerMultiple, m.getContent());
+	}
+	
+	@Test 
+	public void testSupprimerMultipleUndoRedo() {
+		testSupprimerMultipleRedo();
+		//Quelques CTRL-Z, CTRL-Y suivant la même logique.
+		cmds.undo();
+		assertEquals(stage3SupprimerMultiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage4SupprimerMultiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage3SupprimerMultiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage2SupprimerMultiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage1SupprimerMultiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage2SupprimerMultiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage1SupprimerMultiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage2SupprimerMultiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage3SupprimerMultiple, m.getContent());
+	}
+	
+	
 }
