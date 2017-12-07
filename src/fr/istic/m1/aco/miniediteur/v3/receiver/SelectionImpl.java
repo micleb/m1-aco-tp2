@@ -17,8 +17,8 @@ public class SelectionImpl implements Selection {
 	 * 
 	 * @param startIndex L'indice de départ de cette sélection, inclue.
 	 * @param length La taille de la sélection. 
-	 * @precondition startIndex >= 0 
-	 * @precondition length >= 0
+	 * @precondition startIndex {@literal >=} 0 
+	 * @precondition length {@literal >= } 0
 	 * @throws IllegalArgumentException si une précondition n'est pas vérifié
 	 */
 	public SelectionImpl(int startIndex, int length) {
@@ -92,12 +92,11 @@ public class SelectionImpl implements Selection {
 			throw new IllegalStateException("La sélection a un état incohérent : " + this.toString());
 		}
 	}
-	public boolean invariantsOk() {
+	private boolean invariantsOk() {
 		return getStartIndex() <= getEndIndex()
 				&& consitencyLengthIndex() 
 				&& consistencyEmpty();
 	}
-
 	private boolean consistencyEmpty() {
 		if (isEmpty()) {
 			return getStartIndex() == getEndIndex() && getLength() == 0;

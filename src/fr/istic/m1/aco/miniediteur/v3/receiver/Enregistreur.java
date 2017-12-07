@@ -25,7 +25,7 @@ public interface Enregistreur {
 	public void stopper();
 	
 	/**
-	 * 
+	 * @param cmd La commande suivante à ajouter à la macro.
 	 * @postcondition isOn() == true
 	 */
 	public void rajouter(Command cmd);
