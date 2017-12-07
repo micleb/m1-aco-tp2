@@ -69,7 +69,7 @@ public class CommandsHistoricImpl implements CommandsHistoric {
 		if (!undoHistoric.isEmpty()) {
 			Memento cmd = undoHistoric.pop();
 
-			System.out.println("REDO ---> \n" + cmd);
+			//TSystem.out.println("REDO ---> \n" + cmd);
 			registerMemento(cmd);
 			cmd.cancelRestore();
 

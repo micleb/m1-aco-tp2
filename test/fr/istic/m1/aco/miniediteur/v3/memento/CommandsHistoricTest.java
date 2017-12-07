@@ -406,7 +406,6 @@ public class CommandsHistoricTest {
 	final String stage3SupprimerMultiple = "1234CDE"; 
 	final String stage4SupprimerMultiple = "34CDE";
 	
-	
 	@Test 
 	public void testSupprimerMultipleUndo() {
 		//On supprime 789A
@@ -489,5 +488,141 @@ public class CommandsHistoricTest {
 		assertEquals(stage3SupprimerMultiple, m.getContent());
 	}
 	
+	final String stage1Multiple = "123456ABCDEF"; //Suppression
+	final String stage2Multiple = "*123456ABCDEF"; //Insertion (selection vide)
+	final String stage3Multiple = "GHIJ123456ABCDEF"; //Insertion (selection non vide)
+	final String stage4Multiple = "123456ABCDEF"; //Couper
+	final String stage5Multiple = "123456ABCDEFGHIJ"; //Coller vide
+	final String stage6Multiple = "123456ABCDEFGHIJ*"; //Inserer + Copier
+	final String stage7Multiple = "123456A*DEFGHIJ*"; //Coller non vide
+	
+	@Test 
+	public void testMultipleCmdMultipleUndo() {
+		makeSelection(6, 3);
+		supprimer.executer();
+		cmds.registerCommand(supprimer);
+		assertEquals(stage1Multiple, m.getContent());
+		
+		
+		makeSelection(8, 1);
+		makeSelection(0, 0);
+		ui.addFakeUserResponse("*");
+		inserer.executer();
+		cmds.registerCommand(inserer);
+		assertEquals(stage2Multiple, m.getContent());
+		
+		makeSelection(12, 0);
+		makeSelection(0, 1);
+		ui.addFakeUserResponse("GHIJ");
+		inserer.executer();
+		cmds.registerCommand(inserer);
+		assertEquals(stage3Multiple, m.getContent());
+		
+		makeSelection(5, 2);
+		makeSelection(0, 4);
+		couper.executer();
+		cmds.registerCommand(couper);
+		assertEquals(stage4Multiple, m.getContent());
+		
+		makeSelection(7, 2);
+		makeSelection(12, 0);
+		coller.executer();
+		cmds.registerCommand(coller);
+		assertEquals(stage5Multiple, m.getContent());
+		
+		makeSelection(16, 0);
+		ui.addFakeUserResponse("*");
+		inserer.executer();
+		cmds.registerCommand(inserer);
+		makeSelection(7, 2);
+		makeSelection(16, 1);
+		copier.executer();
+		cmds.registerCommand(copier);
+		assertEquals(stage6Multiple, m.getContent());
+		assertEquals("*", m.getPresspapierContent());
+		
+		makeSelection(12, 0);
+		makeSelection(7, 2);
+		coller.executer();
+		cmds.registerCommand(coller);
+		assertEquals(stage7Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage6Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage5Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage4Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage3Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage2Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage1Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(INITIAL_CONTENT, m.getContent());
+	}
+	
+	@Test
+	public void testMultipleCmdMultipleRedo() {
+		testMultipleCmdMultipleUndo();
+		cmds.redo();
+		assertEquals(stage1Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage2Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage3Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage4Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage5Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage6Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage7Multiple, m.getContent());
+	}
+	
+	@Test
+	public void testMultipleCmdMultipleUndoRedo() {
+		testMultipleCmdMultipleRedo();
+		cmds.undo();
+		assertEquals(stage6Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage7Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage6Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage5Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage6Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage5Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage4Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage3Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage4Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage3Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage2Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage1Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage2Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage3Multiple, m.getContent());
+		
+		cmds.undo();
+		assertEquals(stage2Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(stage1Multiple, m.getContent());
+		cmds.undo();
+		assertEquals(INITIAL_CONTENT, m.getContent());
+		cmds.redo();
+		assertEquals(stage1Multiple, m.getContent());
+		cmds.redo();
+		assertEquals(stage2Multiple, m.getContent());
+	}
 	
 }
