@@ -5,6 +5,13 @@ import java.util.Deque;
 
 import fr.istic.m1.aco.miniediteur.v3.command.Command;
 
+/**
+ * Une implementations possible de CommandsHistoric.
+ * Cette implementation est basée sur un système de pile LIFO. 
+ * On maintient deux piles, une pile pour mémorisé les commandes joués, une autre pour mémorisé les commandes annulées.
+ * 
+ * Lors qu'on annule une commande joués, on la place dont la la pile des commandes annulées pour pouvoir potentiellement restorer.
+ */
 public class CommandsHistoricImpl implements CommandsHistoric {
 	private Deque<Memento> historic;
 	private Deque<Memento> undoHistoric;
@@ -26,18 +33,13 @@ public class CommandsHistoricImpl implements CommandsHistoric {
 			return ;
 		}
 
-		//On garde une selection que si elle est suivi d'une commande qui effectue un changement.
+		//On ne garde une selection que si elle est suivi d'une commande qui effectue un changement.
 		if (mem.isIntermediateMemento() && !historic.isEmpty() && historic.peek().isIntermediateMemento()) {
 			return ;
 		}
 		historic.push(mem);
 	}
-	/**
-	 * Annule la dernière commande enregistrée en restorant
-	 * le contenu du moteur à son état avant execution.
-	 * 
-	 * Cette commande peut-alors être rejouée via la méthode redo().   
-	 */
+
 	@Override
 	public void undo() {
 		if (this.historic.isEmpty()) {
@@ -48,16 +50,16 @@ public class CommandsHistoricImpl implements CommandsHistoric {
 
 		//System.out.println(mem);
 		mem.restore();
-
+		
+		//Pour avoir un comportement d'annulation naturel.
+		//Dans la plupart des éditeurs, si l'on fait un couper puis une nouvelle sélection juste après, 
+		//on s'attend à ce qu'un CTRL-Z annule immédiatement le couper, sans avoir à faire deux CTRL-Z d'affilé à cause de 
+		//la selection faite après.
 		if (mem.isIntermediateMemento()){
 			undo();
 		}
 	}
 
-	/**
-	 * Restore la dernière commande précedement annulée en la rejouant.
-	 * Il est possible de l'annuler de nouveau via un nouvel appel à undo().
-	 */
 	@Override
 	public void redo() {
 		if (undoHistoric.isEmpty()) {
@@ -67,9 +69,9 @@ public class CommandsHistoricImpl implements CommandsHistoric {
 		if (!undoHistoric.isEmpty()) {
 			Memento cmd = undoHistoric.pop();
 
-			//System.out.println("REDO ---> \n" + cmd);
+			System.out.println("REDO ---> \n" + cmd);
 			registerMemento(cmd);
-			cmd.cancelRestore();;
+			cmd.cancelRestore();
 
 			if (cmd.isIntermediateMemento()) {
 				redo();

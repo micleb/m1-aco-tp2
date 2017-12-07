@@ -5,8 +5,15 @@ import fr.istic.m1.aco.miniediteur.v3.command.Command;
  * Abstraction de l'historique des commandes effectuées. 
  * Cette interface offre des opérations pour pouvoir les défaires et les refaires.
  * 
- * Il faut d'abord signaler à l'historique qu'une commande à été effectuée via la méthode registerCommand(),
- * puis effecter les opérations défaire,refaire respectivement par undo redo.
+ * Il faut d'abord signaler à l'historique qu'une commande a été effectuée via la méthode registerCommand(),
+ * puis effectuer les opérations défaire,refaire respectivement par undo redo.
+ * 
+ * Chaque commande executé doit toujours être mémorisée, et ce immédiatement après execution
+ * ce n'est pas au client de décider si la commande doit avoir un traitement ou un ordre spéciale.  
+ * 
+ * Ce choix à été fait pour permettre au client de ne pas avoir à gérer les détails sous-jacents, de pouvoir dans le futur changer la gestion de manière invisible
+ * et d'avoir une interface générique valables pour toutes les commandes.
+ *
  */
 public interface CommandsHistoric {
 	
@@ -18,7 +25,8 @@ public interface CommandsHistoric {
 	public void registerCommand(Command cmd);
 
 	/**
-	 * Annule la dernière commande mémorisée via registerCommand en restorant l'état du contenu du moteur avant son éxécution. 
+	 * Annule la dernière commande mémorisée qui modifie l'état du moteur en restorant l'état du contenu du moteur avant son éxécution. 
+	 * @see CommandsHistoric#registerCommand(Command)
 	 * @precondition Il doit y avoir quelque chose à annuler, c'est à dire que commandsHistoricsSize() > 0.
 	 */
 	public void undo();

@@ -11,7 +11,7 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.Selection;
  * Dans le cas d'une sélection non vide au moment du coller, on écrase l'ancien contenu.
  */
 public class Coller implements Command, ReplayableCommand {
-	private Moteur m;
+	private final Moteur m;
 	private Selection lastSelection;
 	private String lastRemovedContent;
 

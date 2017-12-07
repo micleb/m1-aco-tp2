@@ -5,9 +5,15 @@ import fr.istic.m1.aco.miniediteur.v3.memento.EmptyMemento;
 import fr.istic.m1.aco.miniediteur.v3.memento.Memento;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Enregistreur;
 
+/**
+ * Commande pour démarrer l'enregistrement de macro.
+ * On affiche un message d'erreur à l'utilisateur en cas d'utilisation invalide,
+ * comme tenter de démarrer un enregistreur déjà démarré. 
+ * 
+ */
 public class StartRecording implements Command {
-	private Enregistreur rec;
-	private IHM ui;
+	private final Enregistreur rec;
+	private final IHM ui;
 	
 	public StartRecording(Enregistreur recorder, IHM ui) {
 		this.ui = ui;

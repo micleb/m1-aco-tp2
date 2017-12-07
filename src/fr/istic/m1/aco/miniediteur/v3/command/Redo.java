@@ -6,14 +6,14 @@ import fr.istic.m1.aco.miniediteur.v3.memento.EmptyMemento;
 import fr.istic.m1.aco.miniediteur.v3.memento.Memento;
 
 /**
- * Commande d'annulation de commande (CTRL-Z).
- * Rétablie l'état précédant du texte de l'éditeur.
- * Si il n'y a rien à annuler, on envoie un message d'erreur à l'utilisateur.
+ * Commande pour rejouer une commande annulée (CTRL-Y).
+ * Rétablie l'état avant annulation du texte de l'éditeur.
+ * Si il n'y a rien à restorer, on envoie un message d'erreur à l'utilisateur.
  */
 public class Redo implements Command {
 
-	private CommandsHistoric historic;
-	private IHM ui;
+	private final CommandsHistoric historic;
+	private final IHM ui;
 	
 	public Redo(CommandsHistoric historic, IHM ui) {
 		this.historic = historic;

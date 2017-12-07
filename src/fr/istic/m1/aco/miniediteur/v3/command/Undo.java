@@ -5,6 +5,11 @@ import fr.istic.m1.aco.miniediteur.v3.memento.CommandsHistoric;
 import fr.istic.m1.aco.miniediteur.v3.memento.EmptyMemento;
 import fr.istic.m1.aco.miniediteur.v3.memento.Memento;
 
+/**
+ * Commande d'annulation de commande (CTRL-Z).
+ * Rétablie l'état précédant du texte de l'éditeur.
+ * Si il n'y a rien à annuler, on envoie un message d'erreur à l'utilisateur.
+ */
 public class Undo implements Command {
 
 	private final CommandsHistoric historic;
