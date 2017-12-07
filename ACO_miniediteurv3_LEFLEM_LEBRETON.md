@@ -27,18 +27,21 @@ Les images sont beaucoup trop grandes pour passer sur une feuille A4. Nous vous 
 * ./diagrammes/v1/invoker_v1.jpg
 * ./diagrammes/v1/memento_v1.jpg
 * ./diagrammes/v1/command_v1.jpg
+* ./diagrammes/v1/global_v1.jpg
 
 ### 1.2. Version 2
 * ./diagrammes/v2/receiver_v2.jpg
 * ./diagrammes/v2/invoker_v2.jpg
 * ./diagrammes/v2/memento_v2.jpg
 * ./diagrammes/v2/command_v2.jpg
+* ./diagrammes/v1/global_v2.jpg
 
 ### 1.3. Version 3
 * ./diagrammes/v3/receiver_v3.jpg
 * ./diagrammes/v3/invoker_v3.jpg
 * ./diagrammes/v3/memento_v3.jpg
 * ./diagrammes/v3/command_v3.jpg
+* ./diagrammes/v1/global_v3.jpg
 
 ## 2. Choix d'implémentation
 ### 2.1. La gestion des commandes.
@@ -140,3 +143,6 @@ Pour rappel on avait fait ça dans le but d'éviter à l'IHM de devoir connaîtr
 On pourrait lors des tests unitaires utiliser une vraie implémentation d'IHM mais cela perdrait de son intérêt puisque ces tests ne seraient plus automatisés.
 
 La solution classique à ce problème est d'utiliser une doublure de test. Cette doublure permet d'imiter le comportement d'une vraie IHM, comme si l'utilisateur avait lui-même entré la réponse.
+
+Tous les tests passent :  
+!["test_result"](./test_result.png)

@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"fr.istic.m1.aco.miniediteur.v3.command"},{"l":"fr.istic.m1.aco.miniediteur.v3.invoker"}]
