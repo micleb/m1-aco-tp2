@@ -7,6 +7,15 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.Moteur;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Selection;
 import fr.istic.m1.aco.miniediteur.v3.receiver.SelectionImpl;
 
+/**
+ * Command de selection.
+ * Puisque la commande executer ne prend pas de paramètres, 
+ * On fait de l'inversion de resposabilité pour récupérer le choix de l'utilisateur quand à la sélection.
+ * on utilise pour ça les méthodes de requête d'entier fournis par l'interface abstraite IHM.
+ * 
+ * Cette commande vérifie la validité de la sélection et envoie un message d'erreur à l'utilisateur 
+ * en cas de sélection invalide. 
+ */
 public class Selectionner implements Command {
 
 	private final Moteur moteur;
@@ -22,7 +31,14 @@ public class Selectionner implements Command {
 		int start = ui.requestInt("Début de la sélection ?");
 		int stop = ui.requestInt("Taille de la sélection ?");
 		Selection s = new SelectionImpl(start, stop);
-		moteur.selectionner(s);	
+		
+		if (moteur.isValidSelection(s)) {
+			moteur.selectionner(s);	
+		}
+		else {
+			ui.notifyUser("Selection invalide, en dehors des bornes autorisées");
+		}
+		
 	}
 
 	@Override

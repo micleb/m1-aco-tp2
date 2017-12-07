@@ -17,5 +17,4 @@ public class ReplayableSelectionner implements ReplayableCommand {
 	public void executer() {
 		m.selectionner(s);
 	}
-
 }

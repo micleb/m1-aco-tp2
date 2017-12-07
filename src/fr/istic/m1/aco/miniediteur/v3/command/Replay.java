@@ -4,6 +4,9 @@ import fr.istic.m1.aco.miniediteur.v3.memento.EmptyMemento;
 import fr.istic.m1.aco.miniediteur.v3.memento.Memento;
 import fr.istic.m1.aco.miniediteur.v3.receiver.Enregistreur;
 
+/**
+ * Commande d'execution des macro.
+ */
 public class Replay implements Command {
 
 	private final Enregistreur rec;
@@ -26,5 +29,4 @@ public class Replay implements Command {
 	public ReplayableCommand asReplayableCommand() {
 		return new EmptyReplayableCommand();
 	}
-
 }

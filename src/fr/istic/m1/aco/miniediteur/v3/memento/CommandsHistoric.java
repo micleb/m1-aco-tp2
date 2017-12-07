@@ -13,6 +13,7 @@ import fr.istic.m1.aco.miniediteur.v3.command.Command;
  * 
  * Ce choix à été fait pour permettre au client de ne pas avoir à gérer les détails sous-jacents, de pouvoir dans le futur changer la gestion de manière invisible
  * et d'avoir une interface générique valables pour toutes les commandes.
+ *
  */
 public interface CommandsHistoric {
 	

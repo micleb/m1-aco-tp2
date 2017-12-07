@@ -7,6 +7,7 @@ import fr.istic.m1.aco.miniediteur.v3.receiver.Moteur;
 /**
  * Commande qui copie le contenu de la sélection actuelle dans le presse papier du moteur.
  * L'ancien contenu du presse-papier est alors écrasé.
+ *
  */
 public class Copier implements Command, ReplayableCommand {
 	
@@ -25,7 +26,6 @@ public class Copier implements Command, ReplayableCommand {
 	public Memento getMemento() {
 		return EmptyMemento.getUniqueInstance();
 	}
-	
 	
 	@Override
 	public String toString() {

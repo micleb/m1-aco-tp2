@@ -1,14 +1,11 @@
 package fr.istic.m1.aco.miniediteur.v3.receiver;
 
 /**
- * @author bzherlb
  * Le moteur représente l'état de notre éditeur et fournis une abstraction pour affecter cet état et le contenu édité.
- * L'état du moteur est représenté par le contenu du document édité, le contenu du presse-papier ainsi que la selection actuelle.
- * 
+ * L'état du moteur est représenté par le contenu du document édité, le contenu du presse-papier ainsi que la selection actuelle. 
  * Les commandes affectants le contenu du document agissent sur la sélection actuelle.
- * 
  * Pour effectuer une commande qui agit sur le contenu, il faut donc d'abord effectuer une selection via la méthode selectionner.
- * 
+ *
  */
 public interface Moteur {
 	/**
@@ -105,7 +102,7 @@ public interface Moteur {
 
 	/**
 	 * Test si une selection est cohérente avec l'état actuel du moteur, c'est à dire que son début et sa fin sont dans des bornes valides.
-	 * @param s La selection dont on veut verifié qu'elle est applicable.
+	 * @param s La selection dont on veut verifier qu'elle est applicable.
 	 * @return true si la selection est applicable pour executer une commande dessus.
 	 */
 	boolean isValidSelection(Selection s);
